@@ -19,6 +19,11 @@ namespace DnsChanger
 
             DnsChanger.Data.DatabaseInitializer.Initialize();
 
+            Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("Lang.Persian.xaml", UriKind.Relative)
+            });
+
             var services = new ServiceCollection();
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
@@ -50,6 +55,7 @@ namespace DnsChanger
     {
         public bool IsDarkMode { get; set; } = true;
         public string AccentName { get; set; } = "BluePurple";
+        public bool IsEnglish { get; set; } = false;
 
         private static string SettingsPath => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

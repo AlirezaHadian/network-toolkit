@@ -7,7 +7,6 @@
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
-        FlowDirection="RightToLeft"
         ShowInTaskbar="False"
         FontFamily="Segoe UI">
 
@@ -23,17 +22,17 @@
             <!--  آیکون دایره‌ای — بسته به نوع پیام یکی از این ۴ حالت نمایش داده میشه  -->
             <Border x:Name="IconCircle" Width="54" Height="54" CornerRadius="27" HorizontalAlignment="Center" Margin="0,0,0,18">
                 <Grid>
-                    <Viewbox Width="24" Height="24" Visibility="Collapsed" x:Name="SuccessIcon">
+                    <Viewbox Width="24" Height="24" Visibility="Collapsed" x:Name="SuccessIcon" FlowDirection="LeftToRight">
                         <Path Data="M5 13l4 4L19 7" Stroke="White" StrokeThickness="2.6"
                               StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"/>
                     </Viewbox>
-                    <Viewbox Width="22" Height="22" Visibility="Collapsed" x:Name="ErrorIcon">
+                    <Viewbox Width="22" Height="22" Visibility="Collapsed" x:Name="ErrorIcon" FlowDirection="LeftToRight">
                         <Canvas Width="24" Height="24">
                             <Line X1="5" Y1="5" X2="19" Y2="19" Stroke="White" StrokeThickness="2.6" StrokeStartLineCap="Round"/>
                             <Line X1="19" Y1="5" X2="5" Y2="19" Stroke="White" StrokeThickness="2.6" StrokeStartLineCap="Round"/>
                         </Canvas>
                     </Viewbox>
-                    <Viewbox Width="22" Height="22" Visibility="Collapsed" x:Name="WarningIcon">
+                    <Viewbox Width="22" Height="22" Visibility="Collapsed" x:Name="WarningIcon" FlowDirection="LeftToRight">
                         <Canvas Width="24" Height="24">
                             <Line X1="12" Y1="4" X2="12" Y2="14" Stroke="White" StrokeThickness="2.6" StrokeStartLineCap="Round"/>
                             <Ellipse Width="3" Height="3" Canvas.Left="10.5" Canvas.Top="18" Fill="White"/>

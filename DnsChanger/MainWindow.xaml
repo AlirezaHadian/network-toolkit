@@ -22,6 +22,12 @@
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
+        <!--  قانون سراسری: هیچ آیکونی (Viewbox) تحت تاثیر جهت راست‌به‌چپ برنامه قرار نگیره —
+              نه فقط تو حالت فارسی، همیشه. این جلوی تک‌تک فراموش‌شدن‌های قبلی رو برای همیشه می‌گیره.  -->
+        <Style TargetType="Viewbox">
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+        </Style>
+
         <!--  کارت عمومی  -->
         <Style x:Key="DnsCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource BgCard}"/>
@@ -275,7 +281,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
-                            <ContentPresenter x:Name="Content" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            <ContentPresenter x:Name="Content" HorizontalAlignment="Left" VerticalAlignment="Center"
                                               TextElement.Foreground="{TemplateBinding Foreground}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -296,7 +302,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
-                            <ContentPresenter x:Name="Content" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            <ContentPresenter x:Name="Content" HorizontalAlignment="Left" VerticalAlignment="Center"
                                               TextElement.Foreground="{TemplateBinding Foreground}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -366,15 +372,15 @@
                     </Border>
                 </ControlTemplate>
             </ContextMenu.Template>
-            <MenuItem Header="باز کردن برنامه" Style="{StaticResource TrayMenuItemStyle}" Click="TrayOpen_Click"/>
+            <MenuItem Header="{DynamicResource Tray_Open}" Style="{StaticResource TrayMenuItemStyle}" Click="TrayOpen_Click"/>
             <Separator Background="{DynamicResource BorderColor}" Margin="6,4"/>
-            <MenuItem x:Name="TrayApplyDnsMenu" Header="اعمال DNS   ◂" Style="{StaticResource TrayMenuItemStyle}"
+            <MenuItem x:Name="TrayApplyDnsMenu" Header="{DynamicResource Tray_ApplyDns}" Style="{StaticResource TrayMenuItemStyle}"
                       StaysOpenOnClick="True" Click="TrayApplyDnsMenu_Click"/>
-            <MenuItem Header="بازنشانی DNS" Style="{StaticResource TrayMenuItemStyle}" Click="TrayResetDns_Click"/>
+            <MenuItem Header="{DynamicResource Dns_ResetButton}" Style="{StaticResource TrayMenuItemStyle}" Click="TrayResetDns_Click"/>
             <Separator Background="{DynamicResource BorderColor}" Margin="6,4"/>
-            <MenuItem Header="تشخیص و رفع خودکار" Style="{StaticResource TrayMenuItemStyle}" Click="TrayRunDiagnostics_Click"/>
+            <MenuItem Header="{DynamicResource Troubleshoot_DiagnoseTitle}" Style="{StaticResource TrayMenuItemStyle}" Click="TrayRunDiagnostics_Click"/>
             <Separator Background="{DynamicResource BorderColor}" Margin="6,4"/>
-            <MenuItem Header="خروج" Style="{StaticResource TrayMenuItemStyle}" Click="TrayExit_Click"/>
+            <MenuItem Header="{DynamicResource Tray_Exit}" Style="{StaticResource TrayMenuItemStyle}" Click="TrayExit_Click"/>
         </ContextMenu>
 
     </Window.Resources>
@@ -398,7 +404,7 @@
             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="14,0,0,0" VerticalAlignment="Center">
                 <Border Width="20" Height="20" CornerRadius="6" Background="{DynamicResource AccentGradient}">
                     <Viewbox Width="10" Height="10" FlowDirection="LeftToRight">
-                        <Path Data="M13 2 L4 14 L11 14 L10 22 L20 9 L13 9 Z" Fill="White"/>
+                        <Path Data="M19.87,8.6A1,1,0,0,0,19,8H14.42l1.27-4.74a1,1,0,0,0-.17-.87A1,1,0,0,0,14.73,2h-7a1,1,0,0,0-1,.74l-2.68,10a1,1,0,0,0,.17.87,1,1,0,0,0,.8.39H8.89L7.08,20.74a1,1,0,0,0,1.71.93l10.9-12A1,1,0,0,0,19.87,8.6Zm-9.79,8.68,1.07-4a1,1,0,0,0-.17-.87,1,1,0,0,0-.79-.39H6.35L8.49,4h4.93L12.15,8.74a1,1,0,0,0,1,1.26h3.57Z" Fill="White"/>
                     </Viewbox>
                 </Border>
                 <TextBlock Text="DNS Changer" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}"
@@ -434,7 +440,7 @@
                         <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource AccentGradient}">
                             <Viewbox Width="16" Height="16" FlowDirection="LeftToRight">
                                 <Canvas Width="24" Height="24">
-                                    <Path Data="M13 2 L4 14 L11 14 L10 22 L20 9 L13 9 Z" Fill="White"/>
+                                    <Path Data="M19.87,8.6A1,1,0,0,0,19,8H14.42l1.27-4.74a1,1,0,0,0-.17-.87A1,1,0,0,0,14.73,2h-7a1,1,0,0,0-1,.74l-2.68,10a1,1,0,0,0,.17.87,1,1,0,0,0,.8.39H8.89L7.08,20.74a1,1,0,0,0,1.71.93l10.9-12A1,1,0,0,0,19.87,8.6Zm-9.79,8.68,1.07-4a1,1,0,0,0-.17-.87,1,1,0,0,0-.79-.39H6.35L8.49,4h4.93L12.15,8.74a1,1,0,0,0,1,1.26h3.57Z" Fill="White"/>
                                 </Canvas>
                             </Viewbox>
                         </Border>
@@ -445,9 +451,9 @@
                     <Button x:Name="NavDnsButton" Style="{StaticResource SidebarButtonActiveStyle}" Click="NavItem_Click" Tag="Dns" Margin="0,0,0,6">
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
-                                <Path Data="M21.41 8.64v-.05a10 10 0 00-18.78 0v.05a9.86 9.86 0 000 6.72v.05a10 10 0 0018.78 0v-.05a9.86 9.86 0 000-6.72zM4.26 14a7.82 7.82 0 010-4h1.86a16.73 16.73 0 000 4zm.82 2h1.4a12.15 12.15 0 001 2.57A8 8 0 015.08 16zm1.4-8h-1.4a8 8 0 012.37-2.57A12.15 12.15 0 006.48 8zM11 19.7A6.34 6.34 0 018.57 16H11zm0-5.7H8.14a14.36 14.36 0 010-4H11zm0-6H8.57A6.34 6.34 0 0111 4.3zm7.92 0h-1.4a12.15 12.15 0 00-1-2.57A8 8 0 0118.92 8zM13 4.3A6.34 6.34 0 0115.43 8H13zm0 15.4V16h2.43A6.34 6.34 0 0113 19.7zm2.86-5.7H13v-4h2.86a14.36 14.36 0 010 4zm.69 4.57a12.15 12.15 0 001-2.57h1.4a8 8 0 01-2.4 2.57zM19.74 14h-1.86a16.16 16.16 0 00.12-2 16.28 16.28 0 00-.12-2h1.86a7.82 7.82 0 010 4z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                <Path Data="M8,6A1,1,0,1,0,7,5,1,1,0,0,0,8,6ZM21,19H14.82A3,3,0,0,0,13,17.18V15h4a3,3,0,0,0,3-3V10a3,3,0,0,0-.78-2A3,3,0,0,0,20,6V4a3,3,0,0,0-3-3H7A3,3,0,0,0,4,4V6a3,3,0,0,0,.78,2A3,3,0,0,0,4,10v2a3,3,0,0,0,3,3h4v2.18A3,3,0,0,0,9.18,19H3a1,1,0,0,0,0,2H9.18a3,3,0,0,0,5.64,0H21a1,1,0,0,0,0-2ZM6,4A1,1,0,0,1,7,3H17a1,1,0,0,1,1,1V6a1,1,0,0,1-1,1H7A1,1,0,0,1,6,6Zm1,9a1,1,0,0,1-1-1V10A1,1,0,0,1,7,9H17a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1Zm5,8a1,1,0,1,1,1-1A1,1,0,0,1,12,21ZM8,10a1,1,0,1,0,1,1A1,1,0,0,0,8,10Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="سرورهای DNS" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_Dns}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="NavSpeedTestButton" Style="{StaticResource SidebarButtonStyle}" Click="NavItem_Click" Tag="SpeedTest" Margin="0,0,0,6">
@@ -455,7 +461,7 @@
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
                                 <Path Data="M15.29,10.29l-2.78,2.78A2.09,2.09,0,0,0,12,13a2,2,0,0,0-2,2,2.09,2.09,0,0,0,.07.51l-.78.78a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l.78-.78A2.09,2.09,0,0,0,12,17a2,2,0,0,0,2-2,2.09,2.09,0,0,0-.07-.51l2.78-2.78a1,1,0,0,0-1.42-1.42ZM12,4A10,10,0,0,0,2,14a9.91,9.91,0,0,0,1.69,5.56,1,1,0,0,0,1.66-1.12,8,8,0,1,1,13.3,0,1,1,0,0,0,.27,1.39,1,1,0,0,0,.56.17,1,1,0,0,0,.83-.44A9.91,9.91,0,0,0,22,14,10,10,0,0,0,12,4Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="تست سرعت" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_SpeedTest}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="NavTroubleshootButton" Style="{StaticResource SidebarButtonStyle}" Click="NavItem_Click" Tag="Troubleshoot" Margin="0,0,0,6">
@@ -463,7 +469,7 @@
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
                                 <Path Data="M21.71 15.58l-4.52-4.51a6.85 6.85 0 00.14-1.4A7.67 7.67 0 006.42 2.72a1 1 0 00-.57.74 1 1 0 00.28.88l4.35 4.34-1.8 1.8-4.34-4.35a1 1 0 00-.88-.27 1 1 0 00-.74.56 7.67 7.67 0 007 10.91 6.85 6.85 0 001.4-.14l4.51 4.52a1 1 0 001.42 0 1 1 0 000-1.42l-4.9-4.9a1 1 0 00-.95-.26 5.88 5.88 0 01-1.48.2A5.67 5.67 0 014 9.67a6 6 0 01.08-1L8 12.6a1 1 0 001.42 0l3.18-3.21a1 1 0 000-1.39L8.71 4.08a6.12 6.12 0 011-.08 5.67 5.67 0 015.66 5.67 5.88 5.88 0 01-.2 1.48 1 1 0 00.26.95l4.9 4.9a1 1 0 001.42-1.42z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="رفع مشکل اتصال" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_Troubleshoot}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="NavWifiButton" Style="{StaticResource SidebarButtonStyle}" Click="NavItem_Click" Tag="Wifi" Margin="0,0,0,6">
@@ -471,24 +477,24 @@
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
                                 <Path Data="M12 15a3 3 0 1 0 3 3a3 3 0 0 0-3-3Zm0 4a1 1 0 1 1 1-1a1 1 0 0 1-1 1Zm0-8a7.06 7.06 0 0 0-4.95 2.05a1 1 0 0 0 0 1.41a1 1 0 0 0 1.41 0a5 5 0 0 1 7.08 0a1 1 0 0 0 .7.3a1 1 0 0 0 .76-1.71A7.06 7.06 0 0 0 12 11Zm0-4a11.08 11.08 0 0 0-7.78 3.22a1 1 0 0 0 1.42 1.42a9 9 0 0 1 12.72 0a1 1 0 0 0 .71.29a1 1 0 0 0 .71-.29a1 1 0 0 0 0-1.42A11.08 11.08 0 0 0 12 7Zm10.61.39a15 15 0 0 0-21.22 0a1 1 0 0 0 1.42 1.42a13 13 0 0 1 18.38 0a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="شبکه‌های Wi-Fi" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_Wifi}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="NavIpInfoButton" Style="{StaticResource SidebarButtonStyle}" Click="NavItem_Click" Tag="IpInfo" Margin="0,0,0,6">
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
-                                <Path Data="M21.41 8.64v-.05a10 10 0 00-18.78 0v.05a9.86 9.86 0 000 6.72v.05a10 10 0 0018.78 0v-.05a9.86 9.86 0 000-6.72zM4.26 14a7.82 7.82 0 010-4h1.86a16.73 16.73 0 000 4zm.82 2h1.4a12.15 12.15 0 001 2.57A8 8 0 015.08 16zm1.4-8h-1.4a8 8 0 012.37-2.57A12.15 12.15 0 006.48 8zM11 19.7A6.34 6.34 0 018.57 16H11zm0-5.7H8.14a14.36 14.36 0 010-4H11zm0-6H8.57A6.34 6.34 0 0111 4.3zm7.92 0h-1.4a12.15 12.15 0 00-1-2.57A8 8 0 0118.92 8zM13 4.3A6.34 6.34 0 0115.43 8H13zm0 15.4V16h2.43A6.34 6.34 0 0113 19.7zm2.86-5.7H13v-4h2.86a14.36 14.36 0 010 4zm.69 4.57a12.15 12.15 0 001-2.57h1.4a8 8 0 01-2.4 2.57zM19.74 14h-1.86a16.16 16.16 0 00.12-2 16.28 16.28 0 00-.12-2h1.86a7.82 7.82 0 010 4z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                <Path Data="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="اطلاعات IP" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_IpInfo}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
 
                     <Button x:Name="NavHistoryButton" Style="{StaticResource SidebarButtonStyle}" Click="NavItem_Click" Tag="History" Margin="0,0,0,6">
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
-                                <Path Data="M12 2a10 10 0 00-6.88 2.77V3a1 1 0 00-2 0v4.5a1 1 0 001 1h4.5a1 1 0 000-2h-2.4A8 8 0 114 12a1 1 0 00-2 0A10 10 0 1012 2zm0 6a1 1 0 00-1 1v3a1 1 0 001 1h2a1 1 0 000-2h-1V9a1 1 0 00-1-1z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                <Path Data="M12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1H8.62a1,1,0,0,0,0-2H6.22A8,8,0,1,1,4,12a1,1,0,0,0-2,0A10,10,0,1,0,12,2Zm0,6a1,1,0,0,0-1,1v3a1,1,0,0,0,1,1h2a1,1,0,0,0,0-2H13V9A1,1,0,0,0,12,8Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="تاریخچه‌ی تغییرات" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_History}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
 
@@ -497,9 +503,9 @@
                     <Button x:Name="NavSettingsButton" Style="{StaticResource SidebarButtonStyle}" Click="NavItem_Click" Tag="Settings">
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="14" Height="14" Margin="10,0,0,0" FlowDirection="LeftToRight">
-                                <Path Data="M19.9 12.66a1 1 0 010-1.32l1.28-1.44a1 1 0 00.12-1.17l-2-3.46a1 1 0 00-1.07-.48l-1.88.38a1 1 0 01-1.15-.66l-.61-1.83a1 1 0 00-.95-.68h-4a1 1 0 00-1 .68l-.56 1.83a1 1 0 01-1.15.66L5 4.79a1 1 0 00-1 .48L2 8.73a1 1 0 00.1 1.17l1.27 1.44a1 1 0 010 1.32L2.1 14.1a1 1 0 00-.1 1.17l2 3.46a1 1 0 001.07.48l1.88-.38a1 1 0 011.15.66l.61 1.83a1 1 0 001 .68h4a1 1 0 00.95-.68l.61-1.83a1 1 0 011.15-.66l1.88.38a1 1 0 001.07-.48l2-3.46a1 1 0 00-.12-1.17zM18.41 14l.8.9-1.28 2.22-1.18-.24a3 3 0 00-3.45 2L12.92 20h-2.56L10 18.86a3 3 0 00-3.45-2l-1.18.24-1.3-2.21.8-.9a3 3 0 000-4l-.8-.9 1.28-2.2 1.18.24a3 3 0 003.45-2L10.36 4h2.56l.38 1.14a3 3 0 003.45 2l1.18-.24 1.28 2.22-.8.9a3 3 0 000 3.98zm-6.77-6a4 4 0 104 4 4 4 0 00-4-4zm0 6a2 2 0 112-2 2 2 0 01-2 2z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                <Path Data="M19.9 12.66a1 1 0 0 1 0-1.32l1.28-1.44a1 1 0 0 0 .12-1.17l-2-3.46a1 1 0 0 0-1.07-.48l-1.88.38a1 1 0 0 1-1.15-.66l-.61-1.83a1 1 0 0 0-.95-.68h-4a1 1 0 0 0-1 .68l-.56 1.83a1 1 0 0 1-1.15.66L5 4.79a1 1 0 0 0-1 .48L2 8.73a1 1 0 0 0 .1 1.17l1.27 1.44a1 1 0 0 1 0 1.32L2.1 14.1a1 1 0 0 0-.1 1.17l2 3.46a1 1 0 0 0 1.07.48l1.88-.38a1 1 0 0 1 1.15.66l.61 1.83a1 1 0 0 0 1 .68h4a1 1 0 0 0 .95-.68l.61-1.83a1 1 0 0 1 1.15-.66l1.88.38a1 1 0 0 0 1.07-.48l2-3.46a1 1 0 0 0-.12-1.17ZM18.41 14l.8.9-1.28 2.22-1.18-.24a3 3 0 0 0-3.45 2L12.92 20h-2.56L10 18.86a3 3 0 0 0-3.45-2l-1.18.24-1.3-2.21.8-.9a3 3 0 0 0 0-4l-.8-.9 1.28-2.2 1.18.24a3 3 0 0 0 3.45-2L10.36 4h2.56l.38 1.14a3 3 0 0 0 3.45 2l1.18-.24 1.28 2.22-.8.9a3 3 0 0 0 0 3.98Zm-6.77-6a4 4 0 1 0 4 4 4 4 0 0 0-4-4Zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                             </Viewbox>
-                            <TextBlock Text="تنظیمات" FontSize="13" Margin="10,0,0,0"/>
+                            <TextBlock Text="{DynamicResource Nav_Settings}" FontSize="13" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
@@ -518,28 +524,26 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="سرورهای DNS" Style="{StaticResource PageTitleStyle}"/>
-                            <TextBlock Text="تغییر سریع DNS با یک کلیک" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,0"/>
+                            <TextBlock Text="{DynamicResource Dns_Title}" Style="{StaticResource PageTitleStyle}"/>
+                            <TextBlock Text="{DynamicResource Dns_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,0"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                             <Button x:Name="ResetDnsButton" Style="{StaticResource SecondaryButtonStyle}"
-                                    Padding="12,7" Click="Reset_Click" Margin="0,0,8,0">
+                                    Padding="14,8" Click="Reset_Click" Margin="0,0,8,0">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="↺" FontSize="13" Margin="8,0,0,0"/>
-                                    <TextBlock Text="بازنشانی DNS" FontSize="12"/>
+                                    <Viewbox Width="13" Height="13" Margin="7,0,7,0">
+                                        <Path Data="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                    </Viewbox>
+                                    <TextBlock Text="{DynamicResource Dns_ResetButton}" FontSize="12"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="CheckPingButton" Style="{StaticResource SecondaryButtonStyle}"
-                                    Padding="12,7" Click="CheckPingButton_Click">
+                                    Padding="14,8" Click="CheckPingButton_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Viewbox Width="13" Height="13" Margin="8,0,0,0" FlowDirection="LeftToRight">
-                                        <Canvas Width="24" Height="24">
-                                            <Rectangle Width="4" Height="6" Canvas.Left="2" Canvas.Top="14" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" RadiusX="1" RadiusY="1"/>
-                                            <Rectangle Width="4" Height="10" Canvas.Left="10" Canvas.Top="10" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" RadiusX="1" RadiusY="1"/>
-                                            <Rectangle Width="4" Height="14" Canvas.Left="18" Canvas.Top="6" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" RadiusX="1" RadiusY="1"/>
-                                        </Canvas>
+                                    <Viewbox Width="13" Height="13" Margin="7,0,7,0">
+                                        <Path Data="M12,15a3,3,0,1,0,3,3A3,3,0,0,0,12,15Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,19Zm0-8a7.06,7.06,0,0,0-4.95,2.05,1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0,5,5,0,0,1,7.08,0,1,1,0,0,0,.7.3A1,1,0,0,0,17,13.05,7.06,7.06,0,0,0,12,11Zm0-4a11.08,11.08,0,0,0-7.78,3.22,1,1,0,0,0,1.42,1.42,9,9,0,0,1,12.72,0,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42A11.08,11.08,0,0,0,12,7Zm10.61.39a15,15,0,0,0-21.22,0A1,1,0,0,0,2.81,8.81a13,13,0,0,1,18.38,0,1,1,0,0,0,1.42,0A1,1,0,0,0,22.61,7.39Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                                     </Viewbox>
-                                    <TextBlock Text="بررسی پینگ همه" FontSize="12"/>
+                                    <TextBlock Text="{DynamicResource Dns_CheckPingButton}" FontSize="12"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -556,15 +560,15 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="آداپتور فعال" FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
+                                <TextBlock Text="{DynamicResource Dns_ActiveAdapter}" FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
                                 <TextBlock x:Name="ActiveAdapterText" Text="—" FontSize="14" Foreground="{DynamicResource TextPrimary}" FontWeight="SemiBold" Margin="0,3,0,0"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="DNS فعلی" FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
+                                <TextBlock Text="{DynamicResource Dns_CurrentDns}" FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
                                 <TextBlock x:Name="CurrentDnsText" Text="—" FontSize="14" Foreground="{DynamicResource TextPrimary}" FontWeight="SemiBold" Margin="0,3,0,0"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="IP عمومی" FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
+                                <TextBlock Text="{DynamicResource Dns_PublicIp}" FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
                                 <TextBlock x:Name="PublicIpText" Text="—" FontSize="14" Foreground="{DynamicResource TextPrimary}" FontWeight="SemiBold" Margin="0,3,0,0"/>
                             </StackPanel>
                             <Border Grid.Column="3" Background="{DynamicResource BgChip}" CornerRadius="20" Padding="10,5" VerticalAlignment="Center">
@@ -579,7 +583,7 @@
                     <!--  افزودن DNS  -->
                     <Border Style="{StaticResource DnsCardStyle}" Padding="16" Margin="0,0,0,18" Cursor="Arrow">
                         <StackPanel>
-                            <TextBlock Text="افزودن DNS" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,10"/>
+                            <TextBlock Text="{DynamicResource Dns_AddTitle}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,10"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -587,16 +591,16 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="CustomNameBox" Grid.Column="0" Style="{StaticResource InputStyle}" Margin="0,0,8,0" Tag="نام (مثلا Gaming DNS)"/>
+                                <TextBox x:Name="CustomNameBox" Grid.Column="0" Style="{StaticResource InputStyle}" Margin="0,0,8,0" Tag="{DynamicResource Dns_NamePlaceholder}"/>
                                 <TextBox x:Name="CustomPrimaryBox" Grid.Column="1" Style="{StaticResource InputStyle}" Margin="0,0,8,0" Tag="Primary DNS"/>
                                 <TextBox x:Name="CustomSecondaryBox" Grid.Column="2" Style="{StaticResource InputStyle}" Margin="0,0,8,0" Tag="Secondary DNS"/>
-                                <Button x:Name="AddCustomDnsButton" Grid.Column="3" Content="افزودن" Style="{StaticResource ApplyButtonStyle}" Padding="20,8" Click="AddCustomDnsButton_Click"/>
+                                <Button x:Name="AddCustomDnsButton" Grid.Column="3" Content="{DynamicResource Dns_AddButton}" Style="{StaticResource ApplyButtonStyle}" Padding="20,8" Click="AddCustomDnsButton_Click"/>
                             </Grid>
                         </StackPanel>
                     </Border>
 
                     <!--  لیست سرورهای DNS — پیش‌فرض‌ها + کاستوم، همه از دیتابیس  -->
-                    <TextBlock Text="سرورهای DNS" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,10"/>
+                    <TextBlock Text="{DynamicResource Dns_Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,10"/>
                     <ScrollViewer MaxHeight="330" Margin="0,0,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                                 <ItemsControl x:Name="CustomDnsItemsControl">
                                     <ItemsControl.ItemsPanel>
@@ -626,7 +630,7 @@
                                                         <Border Grid.Column="0" Width="26" Height="26" CornerRadius="8"
                                                                 Background="{DynamicResource BgChip}" HorizontalAlignment="Left">
                                                             <Viewbox Width="13" Height="13" FlowDirection="LeftToRight">
-                                                                <Path Data="M15 17a1 1 0 101 1 1 1 0 00-1-1zm-6 0H6a1 1 0 000 2h3a1 1 0 000-2zm9 0a1 1 0 101 1 1 1 0 00-1-1zm-3-6a1 1 0 101 1 1 1 0 00-1-1zm-6 0H6a1 1 0 000 2h3a1 1 0 000-2zm9-6a1 1 0 101 1 1 1 0 00-1-1zm0 6a1 1 0 101 1 1 1 0 00-1-1zm4-6a3 3 0 00-3-3H5a3 3 0 00-3 3v2a3 3 0 00.78 2A3 3 0 002 11v2a3 3 0 00.78 2A3 3 0 002 17v2a3 3 0 003 3h14a3 3 0 003-3v-2a3 3 0 00-.78-2 3 3 0 00.78-2v-2a3 3 0 00-.78-2A3 3 0 0022 7zm-2 14a1 1 0 01-1 1H5a1 1 0 01-1-1v-2a1 1 0 011-1h14a1 1 0 011 1zm0-6a1 1 0 01-1 1H5a1 1 0 01-1-1v-2a1 1 0 011-1h14a1 1 0 011 1zm0-6a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1h14a1 1 0 011 1zm-5-2a1 1 0 101 1 1 1 0 00-1-1zM9 5H6a1 1 0 000 2h3a1 1 0 000-2z"
+                                                                <Path Data="M8,6A1,1,0,1,0,7,5,1,1,0,0,0,8,6ZM21,19H14.82A3,3,0,0,0,13,17.18V15h4a3,3,0,0,0,3-3V10a3,3,0,0,0-.78-2A3,3,0,0,0,20,6V4a3,3,0,0,0-3-3H7A3,3,0,0,0,4,4V6a3,3,0,0,0,.78,2A3,3,0,0,0,4,10v2a3,3,0,0,0,3,3h4v2.18A3,3,0,0,0,9.18,19H3a1,1,0,0,0,0,2H9.18a3,3,0,0,0,5.64,0H21a1,1,0,0,0,0-2ZM6,4A1,1,0,0,1,7,3H17a1,1,0,0,1,1,1V6a1,1,0,0,1-1,1H7A1,1,0,0,1,6,6Zm1,9a1,1,0,0,1-1-1V10A1,1,0,0,1,7,9H17a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1Zm5,8a1,1,0,1,1,1-1A1,1,0,0,1,12,21ZM8,10a1,1,0,1,0,1,1A1,1,0,0,0,8,10Z"
                                                                       Fill="{DynamicResource AccentBlue}"/>
                                                             </Viewbox>
                                                         </Border>
@@ -643,7 +647,7 @@
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <Button Grid.Column="0" Content="اعمال" Style="{StaticResource ApplyButtonStyle}" Padding="0,6" FontSize="12"
+                                                        <Button Grid.Column="0" Content="{DynamicResource Dns_ApplyButton}" Style="{StaticResource ApplyButtonStyle}" Padding="0,6" FontSize="12"
                                                                 Click="ApplyCustomDns_Click" Tag="{Binding}"/>
                                                         <Button Grid.Column="1" Style="{StaticResource DeleteIconButtonStyle}"
                                                                 Click="DeleteCustomDns_Click" Tag="{Binding}" Margin="6,0,0,0">
@@ -671,22 +675,27 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="تاریخچه‌ی تغییرات" Style="{StaticResource PageTitleStyle}"/>
-                            <TextBlock Text="فهرست کامل تغییرات DNS که تا الان اعمال شده" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,0"/>
+                            <TextBlock Text="{DynamicResource History_Title}" Style="{StaticResource PageTitleStyle}"/>
+                            <TextBlock Text="{DynamicResource History_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,0"/>
                         </StackPanel>
                         <Button Grid.Column="1" x:Name="ClearHistoryButton" Style="{StaticResource SecondaryButtonStyle}"
                                 Padding="12,7" Click="ClearHistoryButton_Click" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
-                                <Viewbox Width="13" Height="13" Margin="8,0,0,0" FlowDirection="LeftToRight">
+                                <Viewbox Width="13" Height="13" Margin="7,0,7,0" FlowDirection="LeftToRight">
                                     <Path Data="M20 6h-4V5a3 3 0 00-3-3h-2a3 3 0 00-3 3v1H4a1 1 0 000 2h1v11a3 3 0 003 3h8a3 3 0 003-3V8h1a1 1 0 000-2zM10 5a1 1 0 011-1h2a1 1 0 011 1v1h-4zm7 14a1 1 0 01-1 1H8a1 1 0 01-1-1V8h10z"
                                           Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
                                 </Viewbox>
-                                <TextBlock Text="پاک کردن همه" FontSize="12"/>
+                                <TextBlock Text="{DynamicResource History_ClearButton}" FontSize="12"/>
                             </StackPanel>
                         </Button>
                     </Grid>
 
-                    <ListBox x:Name="HistoryListBox" Background="Transparent" BorderThickness="0" ScrollViewer.CanContentScroll="False">
+                    <ListBox x:Name="HistoryListBox" Background="Transparent" BorderThickness="0">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="ListBox">
+                                <ItemsPresenter/>
+                            </ControlTemplate>
+                        </ListBox.Template>
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -716,7 +725,7 @@
                                         <Border Grid.Column="0" Width="38" Height="38" CornerRadius="10"
                                                 Background="{DynamicResource BgChip}" VerticalAlignment="Center">
                                             <Viewbox Width="17" Height="17" FlowDirection="LeftToRight">
-                                                <Path Data="M15 17a1 1 0 101 1 1 1 0 00-1-1zm-6 0H6a1 1 0 000 2h3a1 1 0 000-2zm9 0a1 1 0 101 1 1 1 0 00-1-1zm-3-6a1 1 0 101 1 1 1 0 00-1-1zm-6 0H6a1 1 0 000 2h3a1 1 0 000-2zm9-6a1 1 0 101 1 1 1 0 00-1-1zm0 6a1 1 0 101 1 1 1 0 00-1-1zm4-6a3 3 0 00-3-3H5a3 3 0 00-3 3v2a3 3 0 00.78 2A3 3 0 002 11v2a3 3 0 00.78 2A3 3 0 002 17v2a3 3 0 003 3h14a3 3 0 003-3v-2a3 3 0 00-.78-2 3 3 0 00.78-2v-2a3 3 0 00-.78-2A3 3 0 0022 7zm-2 14a1 1 0 01-1 1H5a1 1 0 01-1-1v-2a1 1 0 011-1h14a1 1 0 011 1zm0-6a1 1 0 01-1 1H5a1 1 0 01-1-1v-2a1 1 0 011-1h14a1 1 0 011 1zm0-6a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1h14a1 1 0 011 1zm-5-2a1 1 0 101 1 1 1 0 00-1-1zM9 5H6a1 1 0 000 2h3a1 1 0 000-2z"
+                                                <Path Data="M8,6A1,1,0,1,0,7,5,1,1,0,0,0,8,6ZM21,19H14.82A3,3,0,0,0,13,17.18V15h4a3,3,0,0,0,3-3V10a3,3,0,0,0-.78-2A3,3,0,0,0,20,6V4a3,3,0,0,0-3-3H7A3,3,0,0,0,4,4V6a3,3,0,0,0,.78,2A3,3,0,0,0,4,10v2a3,3,0,0,0,3,3h4v2.18A3,3,0,0,0,9.18,19H3a1,1,0,0,0,0,2H9.18a3,3,0,0,0,5.64,0H21a1,1,0,0,0,0-2ZM6,4A1,1,0,0,1,7,3H17a1,1,0,0,1,1,1V6a1,1,0,0,1-1,1H7A1,1,0,0,1,6,6Zm1,9a1,1,0,0,1-1-1V10A1,1,0,0,1,7,9H17a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1Zm5,8a1,1,0,1,1,1-1A1,1,0,0,1,12,21ZM8,10a1,1,0,1,0,1,1A1,1,0,0,0,8,10Z"
                                                       Fill="{DynamicResource AccentBlue}"/>
                                             </Viewbox>
                                         </Border>
@@ -745,8 +754,8 @@
 
                 <!--  ///////////////////// صفحه تست سرعت ///////////////////// -->
                 <StackPanel x:Name="SpeedTestPagePanel" Visibility="Collapsed">
-                    <TextBlock Text="تست سرعت" Style="{StaticResource PageTitleStyle}"/>
-                    <TextBlock Text="تست دانلود، آپلود، پینگ و دیتاسنتر" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,14"/>
+                    <TextBlock Text="{DynamicResource SpeedTest_Title}" Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock Text="{DynamicResource SpeedTest_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,14"/>
 
                     <Border Style="{StaticResource DnsCardStyle}" Cursor="Arrow" Padding="20" HorizontalAlignment="Stretch" Margin="0,0,0,12">
                         <StackPanel HorizontalAlignment="Center">
@@ -764,7 +773,7 @@
                                     <TextBlock x:Name="SpeedTestLiveNumber" Text="0.0" FontSize="30" FontWeight="Bold"
                                                Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="Mbps" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
-                                    <TextBlock x:Name="SpeedTestStatusText" Text="آماده" FontSize="10.5" Foreground="{DynamicResource TextMuted}"
+                                    <TextBlock x:Name="SpeedTestStatusText" Text="{DynamicResource SpeedTest_Ready}" FontSize="10.5" Foreground="{DynamicResource TextMuted}"
                                                HorizontalAlignment="Center" Margin="0,6,0,0"/>
                                 </StackPanel>
                             </Grid>
@@ -776,10 +785,12 @@
                                     <DropShadowEffect BlurRadius="18" ShadowDepth="4" Opacity="0.35" Color="#5B8CFF"/>
                                 </Button.Effect>
                                 <StackPanel Orientation="Horizontal">
-                                    <Viewbox Width="13" Height="13" Margin="9,0,0,0" FlowDirection="LeftToRight">
-                                        <Polygon Points="0,0 0,17 15,8.5" Fill="White"/>
+                                    <Viewbox Width="13" Height="13" Margin="8,0,8,0" FlowDirection="LeftToRight">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" Fill="White"/>
+                                        </Canvas>
                                     </Viewbox>
-                                    <TextBlock Text="شروع تست سرعت" FontSize="13.5" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{DynamicResource SpeedTest_StartButton}" FontSize="13.5" FontWeight="SemiBold"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -790,28 +801,26 @@
                         <Border Background="{DynamicResource BgCard}" CornerRadius="12" BorderBrush="{DynamicResource BorderColor}"
                                 BorderThickness="1" Padding="10" Margin="0,0,10,0" Cursor="Arrow">
                             <StackPanel HorizontalAlignment="Center">
-                                <Viewbox Width="17" Height="17">
+                                <Viewbox Width="17" Height="17" FlowDirection="LeftToRight">
                                     <Canvas Width="24" Height="24">
-                                        <Line X1="12" Y1="4" X2="12" Y2="17" Stroke="{DynamicResource AccentBlue}" StrokeThickness="2" StrokeStartLineCap="Round"/>
-                                        <Path Data="M6 12 L12 18 L18 12" Stroke="{DynamicResource AccentBlue}" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Fill="Transparent"/>
+                                        <Path Data="M17.71 11.29a1 1 0 00-1.42 0L13 14.59V7a1 1 0 00-2 0v7.59l-3.29-3.3a1 1 0 00-1.42 1.42l5 5a1 1 0 00.33.21.94.94 0 00.76 0 1 1 0 00.33-.21l5-5a1 1 0 000-1.42z" Fill="{DynamicResource AccentBlue}"/>
                                     </Canvas>
                                 </Viewbox>
                                 <TextBlock x:Name="DownloadSpeedText" Text="—" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                                <TextBlock Text="Mbps دانلود" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource SpeedTest_DownloadLabel}" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
                                 <TextBlock x:Name="DownloadSpeedMBText" Text="— MB/s" FontSize="8.5" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,2,0,0"/>
                             </StackPanel>
                         </Border>
                         <Border Background="{DynamicResource BgCard}" CornerRadius="12" BorderBrush="{DynamicResource BorderColor}"
                                 BorderThickness="1" Padding="10" Margin="0,0,10,0" Cursor="Arrow">
                             <StackPanel HorizontalAlignment="Center">
-                                <Viewbox Width="17" Height="17">
+                                <Viewbox Width="17" Height="17" FlowDirection="LeftToRight">
                                     <Canvas Width="24" Height="24">
-                                        <Line X1="12" Y1="20" X2="12" Y2="7" Stroke="{DynamicResource AccentPurple}" StrokeThickness="2" StrokeStartLineCap="Round"/>
-                                        <Path Data="M6 12 L12 6 L18 12" Stroke="{DynamicResource AccentPurple}" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Fill="Transparent"/>
+                                        <Path Data="M17.71 11.29l-5-5a1 1 0 00-.33-.21 1 1 0 00-.76 0 1 1 0 00-.33.21l-5 5a1 1 0 001.42 1.42L11 9.41V17a1 1 0 002 0V9.41l3.29 3.3a1 1 0 001.42 0 1 1 0 000-1.42z" Fill="{DynamicResource AccentPurple}"/>
                                     </Canvas>
                                 </Viewbox>
                                 <TextBlock x:Name="UploadSpeedText" Text="—" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                                <TextBlock Text="Mbps آپلود" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource SpeedTest_UploadLabel}" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
                                 <TextBlock x:Name="UploadSpeedMBText" Text="— MB/s" FontSize="8.5" Foreground="{DynamicResource TextMuted}" HorizontalAlignment="Center" Margin="0,2,0,0"/>
                             </StackPanel>
                         </Border>
@@ -820,13 +829,11 @@
                             <StackPanel HorizontalAlignment="Center">
                                 <Viewbox Width="17" Height="17" FlowDirection="LeftToRight">
                                     <Canvas Width="24" Height="24">
-                                        <Rectangle Width="4" Height="6" Canvas.Left="2" Canvas.Top="14" Fill="{DynamicResource Success}" RadiusX="1" RadiusY="1"/>
-                                        <Rectangle Width="4" Height="10" Canvas.Left="10" Canvas.Top="10" Fill="{DynamicResource Success}" RadiusX="1" RadiusY="1"/>
-                                        <Rectangle Width="4" Height="14" Canvas.Left="18" Canvas.Top="6" Fill="{DynamicResource Success}" RadiusX="1" RadiusY="1"/>
+                                        <Path Data="M14,9H10a1,1,0,0,0-1,1V22a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V10A1,1,0,0,0,14,9ZM13,21H11V11h2ZM22,1H18a1,1,0,0,0-1,1V22a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V2A1,1,0,0,0,22,1ZM21,21H19V3h2ZM6,15H2a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1H6a1,1,0,0,0,1-1V16A1,1,0,0,0,6,15ZM5,21H3V17H5Z" Fill="{DynamicResource Success}"/>
                                     </Canvas>
                                 </Viewbox>
                                 <TextBlock x:Name="PingResultText" Text="—" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                                <TextBlock Text="ms پینگ" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource SpeedTest_PingLabel}" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="{DynamicResource BgCard}" CornerRadius="12" BorderBrush="{DynamicResource BorderColor}"
@@ -839,18 +846,18 @@
                                     </Canvas>
                                 </Viewbox>
                                 <TextBlock x:Name="JitterResultText" Text="—" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                                <TextBlock Text="ms جیتر" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource SpeedTest_JitterLabel}" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="{DynamicResource BgCard}" CornerRadius="12" BorderBrush="{DynamicResource BorderColor}"
                                 BorderThickness="1" Padding="10" Cursor="Arrow">
                             <StackPanel HorizontalAlignment="Center">
                                 <Viewbox Width="17" Height="17" FlowDirection="LeftToRight">
-                                    <Path Data="M15 17a1 1 0 101 1 1 1 0 00-1-1zm-6 0H6a1 1 0 000 2h3a1 1 0 000-2zm9 0a1 1 0 101 1 1 1 0 00-1-1zm-3-6a1 1 0 101 1 1 1 0 00-1-1zm-6 0H6a1 1 0 000 2h3a1 1 0 000-2zm9-6a1 1 0 101 1 1 1 0 00-1-1zm0 6a1 1 0 101 1 1 1 0 00-1-1zm4-6a3 3 0 00-3-3H5a3 3 0 00-3 3v2a3 3 0 00.78 2A3 3 0 002 11v2a3 3 0 00.78 2A3 3 0 002 17v2a3 3 0 003 3h14a3 3 0 003-3v-2a3 3 0 00-.78-2 3 3 0 00.78-2v-2a3 3 0 00-.78-2A3 3 0 0022 7zm-2 14a1 1 0 01-1 1H5a1 1 0 01-1-1v-2a1 1 0 011-1h14a1 1 0 011 1zm0-6a1 1 0 01-1 1H5a1 1 0 01-1-1v-2a1 1 0 011-1h14a1 1 0 011 1zm0-6a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1h14a1 1 0 011 1zm-5-2a1 1 0 101 1 1 1 0 00-1-1zM9 5H6a1 1 0 000 2h3a1 1 0 000-2z"
+                                    <Path Data="M8,6A1,1,0,1,0,7,5,1,1,0,0,0,8,6ZM21,19H14.82A3,3,0,0,0,13,17.18V15h4a3,3,0,0,0,3-3V10a3,3,0,0,0-.78-2A3,3,0,0,0,20,6V4a3,3,0,0,0-3-3H7A3,3,0,0,0,4,4V6a3,3,0,0,0,.78,2A3,3,0,0,0,4,10v2a3,3,0,0,0,3,3h4v2.18A3,3,0,0,0,9.18,19H3a1,1,0,0,0,0,2H9.18a3,3,0,0,0,5.64,0H21a1,1,0,0,0,0-2ZM6,4A1,1,0,0,1,7,3H17a1,1,0,0,1,1,1V6a1,1,0,0,1-1,1H7A1,1,0,0,1,6,6Zm1,9a1,1,0,0,1-1-1V10A1,1,0,0,1,7,9H17a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1Zm5,8a1,1,0,1,1,1-1A1,1,0,0,1,12,21ZM8,10a1,1,0,1,0,1,1A1,1,0,0,0,8,10Z"
                                           Fill="{DynamicResource TextSecondary}"/>
                                 </Viewbox>
                                 <TextBlock x:Name="DataCenterText" Text="—" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,7,0,0" TextTrimming="CharacterEllipsis"/>
-                                <TextBlock Text="دیتاسنتر" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource SpeedTest_DataCenterLabel}" FontSize="9.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </UniformGrid>
@@ -858,7 +865,7 @@
                     <!--  نمودار نوسانات زنده  -->
                     <Border Background="{DynamicResource BgCard}" CornerRadius="12" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" Padding="14" Cursor="Arrow">
                         <StackPanel>
-                            <TextBlock Text="نوسانات زنده‌ی سرعت" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,8"/>
+                            <TextBlock Text="{DynamicResource SpeedTest_ChartHeader}" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,8"/>
                             <Canvas x:Name="SpeedChartCanvas" Height="85" Background="Transparent" ClipToBounds="True">
                                 <Polyline x:Name="SpeedChartLine" Stroke="{DynamicResource AccentGradient}" StrokeThickness="2.5" StrokeLineJoin="Round"/>
                             </Canvas>
@@ -868,8 +875,8 @@
 
                 <!--  ///////////////////// صفحه رفع مشکل اتصال ///////////////////// -->
                 <StackPanel x:Name="TroubleshootPagePanel" Visibility="Collapsed">
-                    <TextBlock Text="رفع مشکل اتصال" Style="{StaticResource PageTitleStyle}"/>
-                    <TextBlock Text="ابزارهای سریع برای رفع مشکلات رایج اتصال به اینترنت" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,20"/>
+                    <TextBlock Text="{DynamicResource Troubleshoot_Title}" Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock Text="{DynamicResource Troubleshoot_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,20"/>
 
                     <UniformGrid Columns="2" Rows="2">
                         <Border Style="{StaticResource DnsCardStyle}" Margin="0,0,10,10">
@@ -877,9 +884,9 @@
                                 <Viewbox Width="22" Height="22" HorizontalAlignment="Left">
                                     <TextBlock Text="↺" FontSize="24" Foreground="{DynamicResource AccentBlue}" FontWeight="Bold"/>
                                 </Viewbox>
-                                <TextBlock Text="بازنشانی DNS" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
-                                <TextBlock Text="بازگشت به DNS خودکار (DHCP)" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
-                                <Button Content="بازنشانی" Style="{StaticResource SecondaryButtonStyle}" Click="Reset_Click" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_ResetTitle}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_ResetDesc}" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
+                                <Button Content="{DynamicResource Troubleshoot_ResetButton}" Style="{StaticResource SecondaryButtonStyle}" Click="Reset_Click" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource DnsCardStyle}" Margin="0,0,0,10">
@@ -888,9 +895,9 @@
                                     <Path Data="M20 6h-4V5a3 3 0 00-3-3h-2a3 3 0 00-3 3v1H4a1 1 0 000 2h1v11a3 3 0 003 3h8a3 3 0 003-3V8h1a1 1 0 000-2zM10 5a1 1 0 011-1h2a1 1 0 011 1v1h-4zm7 14a1 1 0 01-1 1H8a1 1 0 01-1-1V8h10z"
                                           Fill="{DynamicResource AccentBlue}"/>
                                 </Viewbox>
-                                <TextBlock Text="پاک‌سازی DNS Cache" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
-                                <TextBlock Text="اجرای معادل ipconfig /flushdns" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
-                                <Button x:Name="FlushDnsButton" Content="پاک‌سازی" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Click="FlushDnsButton_Click"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_FlushTitle}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_FlushDesc}" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
+                                <Button x:Name="FlushDnsButton" Content="{DynamicResource Troubleshoot_FlushButton}" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Click="FlushDnsButton_Click"/>
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource DnsCardStyle}" Margin="0,0,10,0">
@@ -901,9 +908,9 @@
                                         <Line X1="12" Y1="2" X2="12" Y2="11" Stroke="{DynamicResource AccentBlue}" StrokeThickness="2" StrokeStartLineCap="Round"/>
                                     </Canvas>
                                 </Viewbox>
-                                <TextBlock Text="ری‌استارت آداپتور شبکه" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
-                                <TextBlock Text="غیرفعال و فعال‌سازی مجدد کارت شبکه" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
-                                <Button x:Name="RestartAdapterButton" Content="ری‌استارت" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Click="RestartAdapterButton_Click"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_RestartTitle}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_RestartDesc}" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
+                                <Button x:Name="RestartAdapterButton" Content="{DynamicResource Troubleshoot_RestartButton}" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Click="RestartAdapterButton_Click"/>
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource DnsCardStyle}">
@@ -914,15 +921,15 @@
                                         <Line X1="13" Y1="13" X2="20" Y2="20" Stroke="{DynamicResource AccentBlue}" StrokeThickness="2" StrokeStartLineCap="Round"/>
                                     </Canvas>
                                 </Viewbox>
-                                <TextBlock Text="تشخیص و رفع خودکار" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
-                                <TextBlock Text="بررسی آداپتور، DNS و اتصال اینترنت با ابزار خودمان" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
-                                <Button x:Name="RunDiagnosticsButton" Content="شروع بررسی" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Click="RunDiagnosticsButton_Click"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_DiagnoseTitle}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,8,0,2"/>
+                                <TextBlock Text="{DynamicResource Troubleshoot_DiagnoseDesc}" FontSize="11" Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" TextWrapping="Wrap"/>
+                                <Button x:Name="RunDiagnosticsButton" Content="{DynamicResource Troubleshoot_DiagnoseButton}" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Click="RunDiagnosticsButton_Click"/>
                             </StackPanel>
                         </Border>
                     </UniformGrid>
 
                     <!--  نتیجه‌ی تشخیص خودکار  -->
-                    <TextBlock Text="نتیجه‌ی بررسی" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,22,0,10"/>
+                    <TextBlock Text="{DynamicResource Troubleshoot_ResultsHeader}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,22,0,10"/>
                     <ItemsControl x:Name="DiagnosticsResultsItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -952,18 +959,20 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="شبکه‌های Wi-Fi در دسترس" Style="{StaticResource PageTitleStyle}"/>
-                            <TextBlock Text="اتصال سریع بدون رفتن به تنظیمات ویندوز" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,0"/>
+                            <TextBlock Text="{DynamicResource Wifi_Title}" Style="{StaticResource PageTitleStyle}"/>
+                            <TextBlock Text="{DynamicResource Wifi_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,0"/>
                         </StackPanel>
-                        <Button Grid.Column="1" x:Name="RefreshWifiButton" Style="{StaticResource SecondaryButtonStyle}" Padding="12,7" VerticalAlignment="Center" Click="RefreshWifiButton_Click">
+                        <Button Grid.Column="1" x:Name="RefreshWifiButton" Style="{StaticResource SecondaryButtonStyle}" Padding="14,8" VerticalAlignment="Center" Click="RefreshWifiButton_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="⟳" FontSize="13" Margin="8,0,0,0"/>
-                                <TextBlock Text="بروزرسانی" FontSize="12"/>
+                                <Viewbox Width="13" Height="13" Margin="7,0,7,0">
+                                    <Path Data="M19.91,15.51H15.38a1,1,0,0,0,0,2h2.4A8,8,0,0,1,4,12a1,1,0,0,0-2,0,10,10,0,0,0,16.88,7.23V21a1,1,0,0,0,2,0V16.5A1,1,0,0,0,19.91,15.51ZM12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1h4.5a1,1,0,0,0,0-2H6.22A8,8,0,0,1,20,12a1,1,0,0,0,2,0A10,10,0,0,0,12,2Z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                </Viewbox>
+                                <TextBlock Text="{DynamicResource IpInfo_Refresh}" FontSize="12"/>
                             </StackPanel>
                         </Button>
                     </Grid>
 
-                    <TextBlock x:Name="WifiLoadingText" Text="در حال جست‌وجوی شبکه‌ها..." FontSize="12"
+                    <TextBlock x:Name="WifiLoadingText" Text="{DynamicResource Wifi_Loading}" FontSize="12"
                                Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,12" Visibility="Collapsed"/>
 
                     <ItemsControl x:Name="WifiNetworksItemsControl">
@@ -1026,7 +1035,7 @@
                                             </StackPanel>
                                             <Border Grid.Column="1" Background="{DynamicResource Success}" CornerRadius="7" Padding="7,2"
                                                     Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}">
-                                                <TextBlock Text="متصل" FontSize="8.5" FontWeight="SemiBold" Foreground="White"/>
+                                                <TextBlock Text="{DynamicResource Dns_Connected}" FontSize="8.5" FontWeight="SemiBold" Foreground="White"/>
                                             </Border>
                                         </Grid>
 
@@ -1049,7 +1058,7 @@
                                             <TextBlock Text="{Binding SecurityInfo}" FontSize="10" Foreground="{DynamicResource TextSecondary}" Margin="6,0,0,0"/>
                                         </StackPanel>
 
-                                        <Button Content="اتصال" Style="{StaticResource ApplyButtonStyle}" Padding="0,7" FontSize="12"
+                                        <Button Content="{DynamicResource Wifi_ConnectButton}" Style="{StaticResource ApplyButtonStyle}" Padding="0,7" FontSize="12"
                                                 Click="ConnectWifi_Click" Tag="{Binding}"/>
                                     </StackPanel>
                                 </Border>
@@ -1060,8 +1069,8 @@
 
                 <!--  ///////////////////// صفحه اطلاعات IP ///////////////////// -->
                 <StackPanel x:Name="IpInfoPagePanel" Visibility="Collapsed">
-                    <TextBlock Text="اطلاعات IP" Style="{StaticResource PageTitleStyle}"/>
-                    <TextBlock Text="موقعیت و اطلاعات IP خودت یا هر IP دلخواه" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,18"/>
+                    <TextBlock Text="{DynamicResource IpInfo_Title}" Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock Text="{DynamicResource IpInfo_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,18"/>
 
                     <!--  IP من — کارت قهرمانی با آیکون گرادینتی بزرگ  -->
                     <Border Style="{StaticResource DnsCardStyle}" Cursor="Arrow" Padding="24" Margin="0,0,0,16">
@@ -1077,26 +1086,26 @@
 
                             <Border Grid.Column="0" Width="64" Height="64" CornerRadius="16" Background="{DynamicResource AccentGradient}" VerticalAlignment="Top">
                                 <Viewbox Width="28" Height="28" FlowDirection="LeftToRight">
-                                    <Path Data="M21.41 8.64v-.05a10 10 0 00-18.78 0v.05a9.86 9.86 0 000 6.72v.05a10 10 0 0018.78 0v-.05a9.86 9.86 0 000-6.72zM4.26 14a7.82 7.82 0 010-4h1.86a16.73 16.73 0 000 4zm.82 2h1.4a12.15 12.15 0 001 2.57A8 8 0 015.08 16zm1.4-8h-1.4a8 8 0 012.37-2.57A12.15 12.15 0 006.48 8zM11 19.7A6.34 6.34 0 018.57 16H11zm0-5.7H8.14a14.36 14.36 0 010-4H11zm0-6H8.57A6.34 6.34 0 0111 4.3zm7.92 0h-1.4a12.15 12.15 0 00-1-2.57A8 8 0 0118.92 8zM13 4.3A6.34 6.34 0 0115.43 8H13zm0 15.4V16h2.43A6.34 6.34 0 0113 19.7zm2.86-5.7H13v-4h2.86a14.36 14.36 0 010 4zm.69 4.57a12.15 12.15 0 001-2.57h1.4a8 8 0 01-2.4 2.57zM19.74 14h-1.86a16.16 16.16 0 00.12-2 16.28 16.28 0 00-.12-2h1.86a7.82 7.82 0 010 4z" Fill="White"/>
+                                    <Path Data="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z" Fill="White"/>
                                 </Viewbox>
                             </Border>
 
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="IP من" FontSize="11.5" Foreground="{DynamicResource TextSecondary}"/>
+                                <TextBlock Text="{DynamicResource IpInfo_MyIp}" FontSize="11.5" Foreground="{DynamicResource TextSecondary}"/>
                                 <TextBlock x:Name="MyIpAddressText" Text="—" FontSize="26" FontWeight="Bold"
                                            Foreground="{DynamicResource TextPrimary}" Margin="0,2,0,16"/>
 
                                 <UniformGrid Columns="3">
                                     <StackPanel Margin="0,0,10,0">
-                                        <TextBlock Text="کشور / شهر" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
+                                        <TextBlock Text="{DynamicResource IpInfo_CountryCity}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
                                         <TextBlock x:Name="MyIpLocationText" Text="—" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,10,0">
-                                        <TextBlock Text="ISP" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
+                                        <TextBlock Text="{DynamicResource IpInfo_Isp}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
                                         <TextBlock x:Name="MyIpIspText" Text="—" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
                                     </StackPanel>
                                     <StackPanel>
-                                        <TextBlock Text="منطقه‌ی زمانی" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
+                                        <TextBlock Text="{DynamicResource IpInfo_Timezone}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
                                         <TextBlock x:Name="MyIpTimezoneText" Text="—" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </UniformGrid>
@@ -1107,14 +1116,14 @@
                     <!--  بررسی IP دلخواه  -->
                     <Border Style="{StaticResource DnsCardStyle}" Cursor="Arrow" Padding="24">
                         <StackPanel>
-                            <TextBlock Text="بررسی یک IP دلخواه" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,16"/>
+                            <TextBlock Text="{DynamicResource IpInfo_CheckCustom}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,16"/>
                             <Grid Margin="0,0,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="CustomIpBox" Grid.Column="0" Style="{StaticResource InputStyle}" Margin="0,0,10,0" Tag="مثلاً 8.8.8.8"/>
-                                <Button Grid.Column="1" Content="بررسی" Style="{StaticResource ApplyButtonStyle}" Padding="28,9" Click="CheckCustomIpButton_Click"/>
+                                <TextBox x:Name="CustomIpBox" Grid.Column="0" Style="{StaticResource InputStyle}" Margin="0,0,10,0" Tag="{DynamicResource IpInfo_Placeholder}"/>
+                                <Button Grid.Column="1" Content="{DynamicResource IpInfo_CheckButton}" Style="{StaticResource ApplyButtonStyle}" Padding="28,9" Click="CheckCustomIpButton_Click"/>
                             </Grid>
 
                             <Grid x:Name="CustomIpResultsPanel" Visibility="Collapsed">
@@ -1133,7 +1142,7 @@
 
                                 <Border Grid.Column="0" Width="52" Height="52" CornerRadius="14" Background="{DynamicResource BgChip}" VerticalAlignment="Top">
                                     <Viewbox Width="22" Height="22" FlowDirection="LeftToRight">
-                                        <Path Data="M21.41 8.64v-.05a10 10 0 00-18.78 0v.05a9.86 9.86 0 000 6.72v.05a10 10 0 0018.78 0v-.05a9.86 9.86 0 000-6.72zM4.26 14a7.82 7.82 0 010-4h1.86a16.73 16.73 0 000 4zm.82 2h1.4a12.15 12.15 0 001 2.57A8 8 0 015.08 16zm1.4-8h-1.4a8 8 0 012.37-2.57A12.15 12.15 0 006.48 8zM11 19.7A6.34 6.34 0 018.57 16H11zm0-5.7H8.14a14.36 14.36 0 010-4H11zm0-6H8.57A6.34 6.34 0 0111 4.3zm7.92 0h-1.4a12.15 12.15 0 00-1-2.57A8 8 0 0118.92 8zM13 4.3A6.34 6.34 0 0115.43 8H13zm0 15.4V16h2.43A6.34 6.34 0 0113 19.7zm2.86-5.7H13v-4h2.86a14.36 14.36 0 010 4zm.69 4.57a12.15 12.15 0 001-2.57h1.4a8 8 0 01-2.4 2.57zM19.74 14h-1.86a16.16 16.16 0 00.12-2 16.28 16.28 0 00-.12-2h1.86a7.82 7.82 0 010 4z" Fill="{DynamicResource AccentBlue}"/>
+                                        <Path Data="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z" Fill="{DynamicResource AccentBlue}"/>
                                     </Viewbox>
                                 </Border>
 
@@ -1141,15 +1150,15 @@
                                     <TextBlock x:Name="CustomIpAddressText" Text="—" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
                                     <UniformGrid Columns="3" Margin="0,12,0,0">
                                         <StackPanel Margin="0,0,10,0">
-                                            <TextBlock Text="کشور / شهر" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
+                                            <TextBlock Text="{DynamicResource IpInfo_CountryCity}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
                                             <TextBlock x:Name="CustomIpLocationText" Text="—" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                         </StackPanel>
                                         <StackPanel Margin="0,0,10,0">
-                                            <TextBlock Text="ISP" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
+                                            <TextBlock Text="{DynamicResource IpInfo_Isp}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
                                             <TextBlock x:Name="CustomIpIspText" Text="—" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
                                         </StackPanel>
                                         <StackPanel>
-                                            <TextBlock Text="منطقه‌ی زمانی" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
+                                            <TextBlock Text="{DynamicResource IpInfo_Timezone}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
                                             <TextBlock x:Name="CustomIpTimezoneText" Text="—" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,4,0,0"/>
                                         </StackPanel>
                                     </UniformGrid>
@@ -1165,14 +1174,14 @@
 
                 <!--  ///////////////////// صفحه تنظیمات ///////////////////// -->
                 <StackPanel x:Name="SettingsPagePanel" Visibility="Collapsed">
-                    <TextBlock Text="تنظیمات" Style="{StaticResource PageTitleStyle}"/>
-                    <TextBlock Text="ظاهر و زبان برنامه رو مطابق سلیقه‌ات تنظیم کن" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,20"/>
+                    <TextBlock Text="{DynamicResource Settings_Title}" Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock Text="{DynamicResource Settings_Subtitle}" Style="{StaticResource PageSubtitleStyle}" Margin="0,3,0,20"/>
 
                     <Border Style="{StaticResource DnsCardStyle}" Cursor="Arrow">
                         <StackPanel>
 
                             <!--  حالت نمایش — کارت پیش‌نمایش دارک/لایت  -->
-                            <TextBlock Text="حالت نمایش" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
+                            <TextBlock Text="{DynamicResource Settings_DisplayMode}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
                                 <Button x:Name="DarkModeButton" Style="{StaticResource SelectableOptionCardStyle}" Tag="Selected" Click="DarkModeButton_Click" Margin="0,0,14,0">
                                     <StackPanel Width="120">
@@ -1182,7 +1191,7 @@
                                                 <Border Width="76" Height="28" CornerRadius="6" Background="#1A1D29" Margin="0,22,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                             </Grid>
                                         </Border>
-                                        <TextBlock Text="🌙  تیره" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                                        <TextBlock Text="{DynamicResource Settings_DarkMode}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="LightModeButton" Style="{StaticResource SelectableOptionCardStyle}" Click="LightModeButton_Click">
@@ -1193,13 +1202,13 @@
                                                 <Border Width="76" Height="28" CornerRadius="6" Background="White" Margin="0,22,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                             </Grid>
                                         </Border>
-                                        <TextBlock Text="☀️  روشن" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                                        <TextBlock Text="{DynamicResource Settings_LightMode}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
 
                             <!--  رنگ لهجه — کارت‌های گرادینتی با تیک انتخاب  -->
-                            <TextBlock Text="رنگ تم" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
+                            <TextBlock Text="{DynamicResource Settings_ThemeColor}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
                                 <StackPanel Margin="0,0,18,0">
                                     <Button x:Name="AccentSwatchBluePurple" Style="{StaticResource AccentSwatchCardStyle}" Tag="Selected" Click="AccentSwatch_Click">
@@ -1210,7 +1219,7 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="آبی‌بنفش" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_BluePurple}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,0,18,0">
                                     <Button x:Name="AccentSwatchGreen" Style="{StaticResource AccentSwatchCardStyle}" Click="AccentSwatch_Click">
@@ -1221,7 +1230,7 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="سبز" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_Green}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,0,18,0">
                                     <Button x:Name="AccentSwatchOrange" Style="{StaticResource AccentSwatchCardStyle}" Click="AccentSwatch_Click">
@@ -1232,7 +1241,7 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="نارنجی" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_Orange}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,0,18,0">
                                     <Button x:Name="AccentSwatchPink" Style="{StaticResource AccentSwatchCardStyle}" Click="AccentSwatch_Click">
@@ -1243,7 +1252,7 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="صورتی" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_Pink}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,0,18,0">
                                     <Button x:Name="AccentSwatchCyan" Style="{StaticResource AccentSwatchCardStyle}" Click="AccentSwatch_Click">
@@ -1254,7 +1263,7 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="فیروزه‌ای" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_Cyan}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,0,18,0">
                                     <Button x:Name="AccentSwatchRed" Style="{StaticResource AccentSwatchCardStyle}" Click="AccentSwatch_Click">
@@ -1265,7 +1274,7 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="قرمز" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_Red}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                                 <StackPanel>
                                     <Button x:Name="AccentSwatchSlate" Style="{StaticResource AccentSwatchCardStyle}" Click="AccentSwatch_Click">
@@ -1276,12 +1285,12 @@
                                             </LinearGradientBrush>
                                         </Button.Background>
                                     </Button>
-                                    <TextBlock Text="خاکستری" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+                                    <TextBlock Text="{DynamicResource Color_Slate}" FontSize="10.5" Foreground="{DynamicResource TextSecondary}" HorizontalAlignment="Center" Margin="0,7,0,0"/>
                                 </StackPanel>
                             </StackPanel>
 
                             <!--  زبان برنامه  -->
-                            <TextBlock Text="زبان برنامه" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
+                            <TextBlock Text="{DynamicResource Settings_Language}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="LangFaButton" Style="{StaticResource SelectableOptionCardStyle}" Tag="Selected" Click="Language_Click" Margin="0,0,14,0">
                                     <StackPanel Width="100">
@@ -1300,7 +1309,7 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-                            <TextBlock Text="فعلاً فقط انتخاب زبان ذخیره میشه — ترجمه‌ی کامل متن‌های برنامه قدم بعدیه."
+                            <TextBlock Text="{DynamicResource Settings_LanguageNote}"
                                        FontSize="10.5" Foreground="{DynamicResource TextSecondary}" Margin="0,10,0,0" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>

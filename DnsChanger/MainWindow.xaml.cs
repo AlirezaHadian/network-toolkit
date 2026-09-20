@@ -82,6 +82,11 @@ namespace DnsChanger
             else
                 LightModeButton_Click(this, null);
 
+            if (settings.IsEnglish)
+            {
+                Language_Click(LangEnButton, null);
+            }
+
             if (FindName(settings.AccentName) is Button savedSwatch)
             {
                 AccentSwatch_Click(savedSwatch, null);
@@ -110,10 +115,11 @@ namespace DnsChanger
         private void ApplyProviderAndNotify(DnsProvider provider)
         {
             _dnsService.SetDns(provider);
-            _activityLog.Add($"{provider.Name} DNS ست شد", $"{provider.Primary}, {provider.Secondary}");
+            _activityLog.Add(string.Format((string)FindResource("Log_DnsSet"), provider.Name),
+    $"{provider.Primary}, {provider.Secondary}");
             LoadHistory();
             RefreshConnectionStatus();
-            ShowMessage($"{provider.Name} DNS Set!", isSuccess: true);
+            ShowMessage($"{provider.Name} {(string)FindResource("Dns_SetMessage")}", isSuccess: true);
         }
         private void ShowMessage(string text, bool isSuccess)
         {
@@ -135,7 +141,7 @@ namespace DnsChanger
                 ActiveAdapterText.Text = "—";
                 CurrentDnsText.Text = "—";
                 PublicIpText.Text = "—";
-                ConnectionStatusText.Text = "قطع";
+                ConnectionStatusText.Text = (string)FindResource("Dns_Disconnected");
                 ConnectionStatusText.Foreground = (Brush)FindResource("Danger");
                 ConnectionStatusDot.Fill = (Brush)FindResource("Danger");
                 return;
@@ -146,13 +152,13 @@ namespace DnsChanger
             var dnsAddresses = adapter.GetIPProperties().DnsAddresses;
             CurrentDnsText.Text = dnsAddresses.Count > 0
                 ? string.Join(", ", dnsAddresses)
-                : "خودکار (DHCP)";
+                : (string)FindResource("Dns_AutoDhcp");
 
-            ConnectionStatusText.Text = "متصل";
+            ConnectionStatusText.Text = (string)FindResource("Dns_Connected");
             ConnectionStatusText.Foreground = (Brush)FindResource("Success");
             ConnectionStatusDot.Fill = (Brush)FindResource("Success");
 
-            PublicIpText.Text = "در حال گرفتن...";
+            PublicIpText.Text = (string)FindResource("Dns_Fetching");
             try
             {
                 using var client = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromSeconds(3) };
@@ -160,7 +166,7 @@ namespace DnsChanger
             }
             catch
             {
-                PublicIpText.Text = "نامشخص";
+                PublicIpText.Text = (string)FindResource("Dns_Unknown");
             }
         }
         /// <summary>
@@ -175,10 +181,10 @@ namespace DnsChanger
         {
             AdminPermissionCheck();
             _dnsService.UnsetDns();
-            _activityLog.Add("DNS به حالت خودکار (DHCP) بازنشانی شد");
+            _activityLog.Add((string)FindResource("Log_DnsReset"));
             LoadHistory();
             RefreshConnectionStatus();
-            ShowMessage("DNS Reset!", isSuccess: false);
+            ShowMessage((string)FindResource("Dns_ResetMessage"), isSuccess: false);
         }
         private void AddCustomDnsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -188,12 +194,12 @@ namespace DnsChanger
 
             if (string.IsNullOrEmpty(name) || !IPAddress.TryParse(primary, out _))
             {
-                CustomDialog.ShowError("لطفاً یک نام و یک IP معتبر برای Primary DNS وارد کن.", "خطا");
+                CustomDialog.ShowError((string)FindResource("Dns_InvalidNameOrIp"));
                 return;
             }
-            if (string.IsNullOrWhiteSpace(secondary) && !IPAddress.TryParse(primary, out _))
+            if (!string.IsNullOrWhiteSpace(secondary) && !IPAddress.TryParse(secondary, out _))
             {
-                CustomDialog.ShowError("Secondary DNS معتبر نیست.", "خطا");
+                CustomDialog.ShowError((string)FindResource("Dns_InvalidSecondaryIp"));
                 return;
             }
 
@@ -206,7 +212,8 @@ namespace DnsChanger
             };
 
             _customDnsRepository.Add(entry);
-            _activityLog.Add($"DNS «{entry.Name}» اضافه شد", $"{entry.Primary}, {entry.Secondary}");
+            _activityLog.Add(string.Format((string)FindResource("Log_DnsAdded"), entry.Name),
+    $"{entry.Primary}, {entry.Secondary}");
             LoadHistory();
             LoadCustomDnsEntries();
 
@@ -228,7 +235,7 @@ namespace DnsChanger
             {
                 _customDnsRepository.Delete(entry.Id);
                 LoadCustomDnsEntries();
-                _activityLog.Add($"DNS «{entry.Name}» حذف شد");
+                _activityLog.Add(string.Format((string)FindResource("Log_DnsDeleted"), entry.Name));
                 LoadHistory();
             }
         }
@@ -272,7 +279,15 @@ namespace DnsChanger
             bool spinnerStopped = false;
             var progress = new Progress<SpeedTestProgress>(p =>
             {
-                SpeedTestStatusText.Text = p.Phase;
+                SpeedTestStatusText.Text = p.Phase switch
+                {
+                    SpeedTestPhase.DataCenterLookup => (string)FindResource("SpeedTest_PhaseDataCenter"),
+                    SpeedTestPhase.DownloadTest => (string)FindResource("SpeedTest_PhaseDownload"),
+                    SpeedTestPhase.UploadTest => (string)FindResource("SpeedTest_PhaseUpload"),
+                    SpeedTestPhase.PingTest => (string)FindResource("SpeedTest_PhasePing"),
+                    SpeedTestPhase.Done => (string)FindResource("SpeedTest_PhaseDone"),
+                    _ => ""
+                };
 
                 if (p.CurrentMbps > 0)
                 {
@@ -314,11 +329,13 @@ namespace DnsChanger
             DataCenterText.Text = result.DataCenter;
 
             SpeedTestLiveNumber.Text = "0.0";
-            SpeedTestStatusText.Text = "آماده";
+            SpeedTestStatusText.Text = (string)FindResource("SpeedTest_Ready");
             UpdateProgressRing(0);
 
-            _activityLog.Add("تست سرعت اجرا شد",
-                $"دانلود: {result.DownloadMbps} Mbps, آپلود: {result.UploadMbps} Mbps, پینگ: {result.PingMs}ms, جیتر: {result.JitterMs}ms");
+            _activityLog.Add((string)FindResource("Log_SpeedTestRun"),
+                string.Format((string)FindResource("Log_SpeedTestDetails"),
+                    result.DownloadMbps, result.UploadMbps, result.PingMs, result.JitterMs));
+
             LoadHistory();
 
             StartSpeedTestButton.IsEnabled = true;
@@ -383,18 +400,27 @@ namespace DnsChanger
         private async void RunDiagnosticsButton_Click(object sender, RoutedEventArgs e)
         {
             RunDiagnosticsButton.IsEnabled = false;
-            RunDiagnosticsButton.Content = "در حال بررسی...";
+            RunDiagnosticsButton.Content = FindResource("Troubleshoot_Checking");
             DiagnosticsResultsItemsControl.ItemsSource = null;
 
             var results = await _diagnosticsService.RunDiagnosticsAsync();
+
+            foreach (var step in results)
+            {
+                step.Title = GetDiagnosticTitle(step.StepType);
+                step.Message = GetDiagnosticMessage(step.StepType, step.IsSuccess, step.ExtraData);
+            }
+
+            DiagnosticsResultsItemsControl.ItemsSource = null;
             DiagnosticsResultsItemsControl.ItemsSource = results;
 
             bool overallOk = results.Count > 0 && results[^1].IsSuccess;
-            _activityLog.Add("تشخیص و رفع خودکار اجرا شد", overallOk ? "نتیجه: موفق" : "نتیجه: مشکل حل نشد");
+            _activityLog.Add((string)FindResource("Troubleshoot_DiagnoseTitle"),
+    overallOk ? (string)FindResource("SpeedTest_PhaseDone") : "");
             LoadHistory();
 
             RunDiagnosticsButton.IsEnabled = true;
-            RunDiagnosticsButton.Content = "شروع بررسی";
+            RunDiagnosticsButton.Content = FindResource("Troubleshoot_DiagnoseButton");
         }
         private async void FlushDnsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -405,32 +431,49 @@ namespace DnsChanger
             };
             using var process = System.Diagnostics.Process.Start(psi);
             process.WaitForExit();
-            _activityLog.Add("DNS Cache پاک‌سازی شد");
+            _activityLog.Add((string)FindResource("Log_FlushDns"));
             LoadHistory();
-            ShowMessage("DNS Cache پاک شد!", isSuccess: true);
+            ShowMessage((string)FindResource("Troubleshoot_FlushSuccess"), isSuccess: true);
         }
         private void RestartAdapterButton_Click(object sender, RoutedEventArgs e)
         {
             AdminPermissionCheck();
             _dnsService.RestartActiveAdapter();
-            _activityLog.Add("آداپتور شبکه ری‌استارت شد");
+            _activityLog.Add((string)FindResource("Log_RestartAdapter"));
             LoadHistory();
-            ShowMessage("آداپتور ری‌استارت شد!", isSuccess: true);
+            ShowMessage((string)FindResource("Troubleshoot_RestartSuccess"), isSuccess: true);
         }
         private void ClearHistoryButton_Click(object sender, RoutedEventArgs e)
         {
-            //var confirm = MessageBox.Show("کل تاریخچه پاک بشه؟", "تایید", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            //if (confirm == MessageBoxResult.Yes)
-            //{
-            //    _activityLog.DeleteAll();
-            //    LoadHistory();
-            //}
-            if (CustomDialog.Confirm("کل تاریخچه پاک بشه؟"))
+            if (CustomDialog.Confirm((string)FindResource("History_ClearConfirm")))
             {
                 _activityLog.DeleteAll();
                 LoadHistory();
             }
         }
+        private string GetDiagnosticTitle(DiagnosticStepType type) => type switch
+        {
+            DiagnosticStepType.AdapterCheck => (string)FindResource("Diag_AdapterTitle"),
+            DiagnosticStepType.GatewayCheck => (string)FindResource("Diag_GatewayTitle"),
+            DiagnosticStepType.AdapterRestartAttempt => (string)FindResource("Diag_RestartTitle"),
+            DiagnosticStepType.InternetCheck => (string)FindResource("Diag_InternetTitle"),
+            DiagnosticStepType.DnsCheck => (string)FindResource("Diag_DnsTitle"),
+            DiagnosticStepType.DnsFallbackSuccess => (string)FindResource("Diag_FallbackTitle"),
+            DiagnosticStepType.DnsFallbackFailure => (string)FindResource("Diag_FallbackTitle"),
+            _ => ""
+        };
+
+        private string GetDiagnosticMessage(DiagnosticStepType type, bool isSuccess, string extraData) => type switch
+        {
+            DiagnosticStepType.AdapterCheck => (string)FindResource(isSuccess ? "Diag_AdapterOk" : "Diag_AdapterFail"),
+            DiagnosticStepType.GatewayCheck => (string)FindResource(isSuccess ? "Diag_GatewayOk" : "Diag_GatewayFail"),
+            DiagnosticStepType.AdapterRestartAttempt => (string)FindResource(isSuccess ? "Diag_RestartOk" : "Diag_RestartFail"),
+            DiagnosticStepType.InternetCheck => (string)FindResource(isSuccess ? "Diag_InternetOk" : "Diag_InternetFail"),
+            DiagnosticStepType.DnsCheck => (string)FindResource(isSuccess ? "Diag_DnsOk" : "Diag_DnsFail"),
+            DiagnosticStepType.DnsFallbackSuccess => string.Format((string)FindResource("Diag_FallbackOk"), extraData),
+            DiagnosticStepType.DnsFallbackFailure => (string)FindResource("Diag_FallbackFail"),
+            _ => ""
+        };
         #endregion
         #region Wifi
         private async Task LoadWifiNetworksAsync()
@@ -438,7 +481,7 @@ namespace DnsChanger
             WifiLoadingText.Visibility = Visibility.Visible;
             WifiNetworksItemsControl.ItemsSource = null;
 
-            var networks = await _wifiService.GetAvailableNetworks();
+            var networks = await _wifiService.GetAvailableNetworksAsync();
 
             WifiNetworksItemsControl.ItemsSource = networks;
             WifiLoadingText.Visibility = Visibility.Collapsed;
@@ -453,7 +496,7 @@ namespace DnsChanger
 
             button.IsEnabled = false;
             var originalContent = button.Content;
-            button.Content = "در حال اتصال...";
+            button.Content = Application.Current.FindResource("Wifi_Connecting");
 
             bool success = false;
 
@@ -481,15 +524,15 @@ namespace DnsChanger
 
             if (success)
             {
-                CustomDialog.ShowInfo($"به {network.Name} متصل شدی.");
-                _activityLog.Add($"به Wi-Fi «{network.Name}» متصل شد");
+                CustomDialog.ShowInfo(string.Format((string)FindResource("Wifi_ConnectSuccess"), network.Name));
+                _activityLog.Add(string.Format((string)FindResource("Log_WifiConnected"), network.Name));
                 LoadHistory();
                 await LoadWifiNetworksAsync();
                 RefreshConnectionStatus();
             }
             else
             {
-                CustomDialog.ShowError($"اتصال به «{network.Name}» ناموفق بود — رمز رو چک کن.");
+                CustomDialog.ShowError(string.Format((string)FindResource("Wifi_ConnectFailed"), network.Name));
             }
         }
         #endregion
@@ -499,23 +542,26 @@ namespace DnsChanger
             try
             {
                 var info = await _ipInfoService.GetIpInfoAsync();
+
                 MyIpAddressText.Text = info.IpAddress;
-                MyIpLocationText.Text = $"{info.CountryName} / {info.CityName}";
+                MyIpLocationText.Text = info.CountryName;
                 MyIpIspText.Text = info.Isp;
                 MyIpTimezoneText.Text = info.TimeZone;
             }
             catch
             {
-                MyIpAddressText.Text = "خطا در دریافت اطلاعات"; 
+                MyIpAddressText.Text = "-";
+                MyIpLocationText.Text = "-";
+                MyIpIspText.Text = "-";
+                MyIpTimezoneText.Text = "-";
             }
         }
-
         private async void CheckCustomIpButton_Click(object sender, RoutedEventArgs e)
         {
             string ip = CustomIpBox.Text.Trim();
             if (!System.Net.IPAddress.TryParse(ip, out _))
             {
-                CustomDialog.ShowError("لطفاً یک IP معتبر وارد کن.");
+                CustomDialog.ShowError((string)FindResource("IpInfo_InvalidIp"));
                 return;
             }
 
@@ -532,7 +578,7 @@ namespace DnsChanger
             }
             catch
             {
-                CustomDialog.ShowError("دریافت اطلاعات این IP ناموفق بود.");
+                CustomDialog.ShowError((string)FindResource("IpInfo_LookupFailed"));
             }
         }
         #endregion
@@ -565,7 +611,10 @@ namespace DnsChanger
             switch (targetPage)
             {
                 case "Dns": DnsPagePanel.Visibility = Visibility.Visible; break;
-                case "History": HistoryPagePanel.Visibility = Visibility.Visible; break;
+                case "History":
+                    HistoryPagePanel.Visibility = Visibility.Visible;
+                    LoadHistory();
+                    break;
                 case "SpeedTest": SpeedTestPagePanel.Visibility = Visibility.Visible; break;
                 case "Troubleshoot": TroubleshootPagePanel.Visibility = Visibility.Visible; break;
                 case "Wifi":
@@ -662,7 +711,24 @@ namespace DnsChanger
             LangEnButton.Tag = null;
             clickedLang.Tag = "Selected";
 
-            CustomDialog.ShowInfo("ترجمه‌ی کامل رابط کاربری رو قدم بعد با هم پیاده می‌کنیم.");
+            bool isEnglish = clickedLang == LangEnButton;
+            string langFile = isEnglish ? "Lang.English.xaml" : "Lang.Persian.xaml";
+
+            var oldDict = Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.StartsWith("Lang."));
+            if (oldDict != null)
+                Application.Current.Resources.MergedDictionaries.Remove(oldDict);
+
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(langFile, UriKind.Relative)
+            });
+
+            FlowDirection = isEnglish ? FlowDirection.LeftToRight : FlowDirection.RightToLeft;
+
+            var settings = AppSettings.Load();
+            settings.IsEnglish = isEnglish;
+            settings.Save();
         }
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -725,7 +791,7 @@ namespace DnsChanger
                 Template = ((ContextMenu)FindResource("TrayContextMenu")).Template
             };
 
-            foreach(var entry in _customDnsRepository.GetAllDns())
+            foreach (var entry in _customDnsRepository.GetAllDns())
             {
                 var item = new MenuItem
                 {
@@ -774,12 +840,12 @@ namespace DnsChanger
         private void TrayResetDns_Click(object sender, RoutedEventArgs e)
         {
             _dnsService.UnsetDns();
-            _activityLog.Add("DNS به حالت خودکار (DHCP) بازنشانی شد — از Tray");
+            _activityLog.Add((string)FindResource("Log_DnsResetFromTray"));
         }
         private async void TrayRunDiagnostics_Click(object sender, RoutedEventArgs e)
         {
             await _diagnosticsService.RunDiagnosticsAsync();
-            _activityLog.Add("تشخیص ورفع خودکار از Tray اجرا شد");
+            _activityLog.Add((string)FindResource("Log_DiagnosticsFromTray"));
         }
         private void TrayExit_Click(object sender, RoutedEventArgs e) => ExitApplication();
         private void ShowFromTray()

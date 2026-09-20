@@ -16,21 +16,21 @@ namespace DnsChanger.Services
         {
             var result = new SpeedTestResult();
 
-            progress?.Report(new SpeedTestProgress { Phase = "در حال شناسایی دیتاسنتر" });
+            progress?.Report(new SpeedTestProgress { Phase = SpeedTestPhase.DataCenterLookup });
             result.DataCenter = await GetDataCenterAsync().ConfigureAwait(false);
-            progress?.Report(new SpeedTestProgress { Phase = "آماده‌ی تست دانلود...", DataCenter = result.DataCenter });
+            progress?.Report(new SpeedTestProgress { Phase =SpeedTestPhase.DownloadTest, DataCenter = result.DataCenter });
 
             result.DownloadMbps = await TestDownloadAsync(progress).ConfigureAwait(false);
-            progress.Report(new SpeedTestProgress { Phase = "آماده‌ی تست آپلود ...", FinalDownloadMbps = result.DownloadMbps });
+            progress.Report(new SpeedTestProgress { Phase = SpeedTestPhase.UploadTest, FinalDownloadMbps = result.DownloadMbps });
 
             result.UploadMbps = await TestUploadAsync(progress).ConfigureAwait(false);
-            progress?.Report(new SpeedTestProgress { Phase = "در حال تست پینگ...", FinalUploadMbps = result.UploadMbps });
+            progress?.Report(new SpeedTestProgress { Phase = SpeedTestPhase.PingTest, FinalUploadMbps = result.UploadMbps });
 
             var (avgPing, jitter) = await MeasureLatencyAsync().ConfigureAwait(false);
             result.PingMs = avgPing;
             result.JitterMs = jitter;
 
-            progress?.Report(new SpeedTestProgress { Phase = "تمام شد", PercentComplete = 100 });
+            progress?.Report(new SpeedTestProgress { Phase = SpeedTestPhase.Done, PercentComplete = 100 });
             return result;
         }
         private async Task<(long avgPing, long jitter)> MeasureLatencyAsync()
@@ -89,7 +89,7 @@ namespace DnsChanger.Services
                         double currentMbps = (totalRead * 8.0 / 1_000_000.0) / elapsed;
                         progress?.Report(new SpeedTestProgress
                         {
-                            Phase = "در حال تست دانلود...",
+                            Phase = SpeedTestPhase.DownloadTest,
                             CurrentMbps = Math.Round(currentMbps, 1),
                             PercentComplete = Math.Min(100, totalRead * 100.0 / totalBytes)
                         });
@@ -128,7 +128,7 @@ namespace DnsChanger.Services
 
                     progress?.Report(new SpeedTestProgress
                     {
-                        Phase = "در حال تست آپلود...",
+                        Phase = SpeedTestPhase.UploadTest,
                         CurrentMbps = Math.Round(chunkMbps, 1),
                         PercentComplete = (i + 1) * 100.0 / chunkCount
                     });

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DnsChanger.Models
 {
@@ -16,7 +17,9 @@ namespace DnsChanger.Models
         public bool Bar2Active => SignalPercent > 40;
         public bool Bar3Active => SignalPercent > 70;
 
-        public string SecurityInfo => IsSecured ? "امن (رمزگذاری شده)" : "باز (بدون رمزگذاری)";
+        public string SecurityInfo => IsSecured ? 
+            (string)Application.Current.FindResource("Wifi_Secured") 
+            : (string)Application.Current.FindResource("Wifi_Open");
 
     }
 }

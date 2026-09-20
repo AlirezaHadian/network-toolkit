@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace DnsChanger.Models
 {
+    public enum SpeedTestPhase
+    {
+        DataCenterLookup,
+        DownloadTest,
+        UploadTest,
+        PingTest,
+        Done
+    }
+
     public class SpeedTestProgress
     {
-        public string Phase { get; set; }
+        public SpeedTestPhase Phase { get; set; }
         public double CurrentMbps { get; set; }
         public double PercentComplete { get; set; }
         public long? PingMs { get; set; }

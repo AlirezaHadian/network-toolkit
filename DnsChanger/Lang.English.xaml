@@ -1,0 +1,171 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--  Sidebar  -->
+    <system:String x:Key="Nav_Dns">DNS Servers</system:String>
+    <system:String x:Key="Nav_SpeedTest">Speed Test</system:String>
+    <system:String x:Key="Nav_Troubleshoot">Troubleshoot</system:String>
+    <system:String x:Key="Nav_Wifi">Wi-Fi Networks</system:String>
+    <system:String x:Key="Nav_IpInfo">IP Info</system:String>
+    <system:String x:Key="Nav_History">Change History</system:String>
+    <system:String x:Key="Nav_Settings">Settings</system:String>
+
+    <!--  Settings page  -->
+    <system:String x:Key="Settings_Title">Settings</system:String>
+    <system:String x:Key="Settings_Subtitle">Customize the app's appearance and language</system:String>
+    <system:String x:Key="Settings_DisplayMode">Display Mode</system:String>
+    <system:String x:Key="Settings_DarkMode">🌙  Dark</system:String>
+    <system:String x:Key="Settings_LightMode">☀️  Light</system:String>
+    <system:String x:Key="Settings_ThemeColor">Theme Color</system:String>
+    <system:String x:Key="Settings_Language">App Language</system:String>
+    <system:String x:Key="Settings_LanguageNote">Changing the language also switches the whole app between right-to-left and left-to-right.</system:String>
+
+    <!--  IP Info page  -->
+    <system:String x:Key="IpInfo_Title">IP Info</system:String>
+    <system:String x:Key="IpInfo_Subtitle">Location and info for your IP or any address</system:String>
+    <system:String x:Key="IpInfo_Refresh">Refresh</system:String>
+    <system:String x:Key="IpInfo_MyIp">My IP</system:String>
+    <system:String x:Key="IpInfo_CountryCity">Country</system:String>
+    <system:String x:Key="IpInfo_Isp">ISP</system:String>
+    <system:String x:Key="IpInfo_Timezone">Time Zone</system:String>
+    <system:String x:Key="IpInfo_CheckCustom">Check a Custom IP</system:String>
+    <system:String x:Key="IpInfo_CheckButton">Check</system:String>
+    <system:String x:Key="IpInfo_Placeholder">e.g. 8.8.8.8</system:String>
+    <system:String x:Key="IpInfo_InvalidIp">Please enter a valid IP address.</system:String>
+    <system:String x:Key="IpInfo_LookupFailed">Failed to retrieve info for this IP.</system:String>
+
+    <!--  DNS page  -->
+    <system:String x:Key="Dns_Title">DNS Servers</system:String>
+    <system:String x:Key="Dns_Subtitle">Switch DNS instantly with one click</system:String>
+    <system:String x:Key="Dns_ResetButton">Reset DNS</system:String>
+    <system:String x:Key="Dns_CheckPingButton">Check Ping for All</system:String>
+    <system:String x:Key="Dns_ActiveAdapter">Active Adapter</system:String>
+    <system:String x:Key="Dns_CurrentDns">Current DNS</system:String>
+    <system:String x:Key="Dns_PublicIp">Public IP</system:String>
+    <system:String x:Key="Dns_Connected">Connected</system:String>
+    <system:String x:Key="Dns_Disconnected">Disconnected</system:String>
+    <system:String x:Key="Dns_AutoDhcp">Automatic (DHCP)</system:String>
+    <system:String x:Key="Dns_AddTitle">Add DNS</system:String>
+    <system:String x:Key="Dns_NamePlaceholder">Name (e.g. Gaming DNS)</system:String>
+    <system:String x:Key="Dns_AddButton">Add</system:String>
+    <system:String x:Key="Dns_ApplyButton">Apply</system:String>
+    <system:String x:Key="Dns_InvalidNameOrIp">Please enter a name and a valid IP for Primary DNS.</system:String>
+    <system:String x:Key="Dns_InvalidSecondaryIp">Secondary DNS is not valid.</system:String>
+    <system:String x:Key="Dns_SetMessage">DNS set</system:String>
+    <system:String x:Key="Dns_ResetMessage">DNS reset</system:String>
+    <system:String x:Key="Dns_Fetching">Fetching...</system:String>
+    <system:String x:Key="Dns_Unknown">Unknown</system:String>
+
+    <!--  Troubleshoot page  -->
+    <system:String x:Key="Troubleshoot_Title">Troubleshoot</system:String>
+    <system:String x:Key="Troubleshoot_Subtitle">Quick tools to fix common connectivity issues</system:String>
+    <system:String x:Key="Troubleshoot_ResetTitle">Reset DNS</system:String>
+    <system:String x:Key="Troubleshoot_ResetDesc">Return to automatic DNS (DHCP)</system:String>
+    <system:String x:Key="Troubleshoot_ResetButton">Reset</system:String>
+    <system:String x:Key="Troubleshoot_FlushTitle">Flush DNS Cache</system:String>
+    <system:String x:Key="Troubleshoot_FlushDesc">Runs the equivalent of ipconfig /flushdns</system:String>
+    <system:String x:Key="Troubleshoot_FlushButton">Flush</system:String>
+    <system:String x:Key="Troubleshoot_RestartTitle">Restart Network Adapter</system:String>
+    <system:String x:Key="Troubleshoot_RestartDesc">Disable and re-enable the network card</system:String>
+    <system:String x:Key="Troubleshoot_RestartButton">Restart</system:String>
+    <system:String x:Key="Troubleshoot_DiagnoseTitle">Diagnose &amp; Auto-Fix</system:String>
+    <system:String x:Key="Troubleshoot_DiagnoseDesc">Checks the adapter, DNS, and internet connection with our own tool</system:String>
+    <system:String x:Key="Troubleshoot_DiagnoseButton">Start Check</system:String>
+    <system:String x:Key="Troubleshoot_ResultsHeader">Check Results</system:String>
+    <system:String x:Key="Troubleshoot_Checking">Checking...</system:String>
+    <system:String x:Key="Troubleshoot_FlushSuccess">DNS cache cleared!</system:String>
+    <system:String x:Key="Troubleshoot_RestartSuccess">Adapter restarted!</system:String>
+    <system:String x:Key="Log_FlushDns">DNS cache flushed</system:String>
+    <system:String x:Key="Log_RestartAdapter">Network adapter restarted</system:String>
+
+    <!--  Wi-Fi page  -->
+    <system:String x:Key="Wifi_Title">Available Wi-Fi Networks</system:String>
+    <system:String x:Key="Wifi_Subtitle">Quick connect without opening Windows settings</system:String>
+    <system:String x:Key="Wifi_Loading">Searching for networks...</system:String>
+    <system:String x:Key="Wifi_ConnectButton">Connect</system:String>
+    <system:String x:Key="Wifi_Connecting">Connecting...</system:String>
+    <system:String x:Key="Wifi_Secured">Secured (encrypted)</system:String>
+    <system:String x:Key="Wifi_Open">Open (unencrypted)</system:String>
+    <system:String x:Key="Wifi_ConnectSuccess">Connected to "{0}".</system:String>
+    <system:String x:Key="Wifi_ConnectFailed">Failed to connect to "{0}" — check the password.</system:String>
+    <system:String x:Key="Wifi_PasswordTitle">Connect to "{0}"</system:String>
+    <system:String x:Key="Wifi_PasswordPrompt">Enter the network password:</system:String>
+    <system:String x:Key="Dialog_CancelButton">Cancel</system:String>
+    <system:String x:Key="Dialog_ConfirmTitle">Confirm</system:String>
+    <system:String x:Key="Dialog_YesButton">Yes</system:String>
+    <system:String x:Key="Dialog_NoButton">No</system:String>
+    <system:String x:Key="Dialog_OkButton">OK</system:String>
+    <system:String x:Key="Dialog_ErrorTitle">Error</system:String>
+    <system:String x:Key="Dialog_WarningTitle">Warning</system:String>
+    <system:String x:Key="Dialog_InfoTitle">Notice</system:String>
+
+    <!--  Speed Test page  -->
+    <system:String x:Key="SpeedTest_Title">Speed Test</system:String>
+    <system:String x:Key="SpeedTest_Subtitle">Download, upload, ping, and data center test</system:String>
+    <system:String x:Key="SpeedTest_Ready">Ready</system:String>
+    <system:String x:Key="SpeedTest_StartButton">Start Speed Test</system:String>
+    <system:String x:Key="SpeedTest_DownloadLabel">Download Mbps</system:String>
+    <system:String x:Key="SpeedTest_UploadLabel">Upload Mbps</system:String>
+    <system:String x:Key="SpeedTest_PingLabel">Ping ms</system:String>
+    <system:String x:Key="SpeedTest_JitterLabel">Jitter ms</system:String>
+    <system:String x:Key="SpeedTest_DataCenterLabel">Data Center</system:String>
+    <system:String x:Key="SpeedTest_ChartHeader">Live Speed Fluctuations</system:String>
+    <system:String x:Key="SpeedTest_PhaseDataCenter">Detecting data center...</system:String>
+    <system:String x:Key="SpeedTest_PhaseDownload">Testing download...</system:String>
+    <system:String x:Key="SpeedTest_PhaseUpload">Testing upload...</system:String>
+    <system:String x:Key="SpeedTest_PhasePing">Testing ping...</system:String>
+    <system:String x:Key="SpeedTest_PhaseDone">Done</system:String>
+
+    <!--  History page  -->
+    <system:String x:Key="History_Title">Change History</system:String>
+    <system:String x:Key="History_Subtitle">Full list of DNS changes applied so far</system:String>
+    <system:String x:Key="History_ClearButton">Clear All</system:String>
+    <system:String x:Key="History_ClearConfirm">Clear the entire history?</system:String>
+
+    <!--  Tray menu  -->
+    <system:String x:Key="Tray_Open">Open App</system:String>
+    <system:String x:Key="Tray_ApplyDns">Apply DNS   ◂</system:String>
+    <system:String x:Key="Tray_Exit">Exit</system:String>
+
+    <!--  Diagnose & Auto-Fix  -->
+    <system:String x:Key="Diag_AdapterTitle">Network Adapter</system:String>
+    <system:String x:Key="Diag_AdapterOk">An active adapter was found.</system:String>
+    <system:String x:Key="Diag_AdapterFail">No active adapter was found.</system:String>
+    <system:String x:Key="Diag_GatewayTitle">Router (Gateway) Connection</system:String>
+    <system:String x:Key="Diag_GatewayOk">The router is reachable.</system:String>
+    <system:String x:Key="Diag_GatewayFail">The router did not respond.</system:String>
+    <system:String x:Key="Diag_RestartTitle">Adapter Restart Result</system:String>
+    <system:String x:Key="Diag_RestartOk">The adapter was restarted and the router is now reachable.</system:String>
+    <system:String x:Key="Diag_RestartFail">The router still didn't respond even after restarting the adapter.</system:String>
+    <system:String x:Key="Diag_InternetTitle">Internet Connection</system:String>
+    <system:String x:Key="Diag_InternetOk">The internet is connected.</system:String>
+    <system:String x:Key="Diag_InternetFail">No internet (even a direct IP didn't respond).</system:String>
+    <system:String x:Key="Diag_DnsTitle">DNS Server</system:String>
+    <system:String x:Key="Diag_DnsOk">DNS is working correctly.</system:String>
+    <system:String x:Key="Diag_DnsFail">Internet is connected but DNS isn't responding. Switching to a fallback server...</system:String>
+    <system:String x:Key="Diag_FallbackTitle">Auto-Fix</system:String>
+    <system:String x:Key="Diag_FallbackOk">Fixed! DNS switched to {0}.</system:String>
+    <system:String x:Key="Diag_FallbackFail">None of the fallback DNS servers responded either — the issue is likely deeper filtering or the ISP itself.</system:String>
+
+    <!--  Theme color names  -->
+    <system:String x:Key="Color_BluePurple">Blue-Purple</system:String>
+    <system:String x:Key="Color_Green">Green</system:String>
+    <system:String x:Key="Color_Orange">Orange</system:String>
+    <system:String x:Key="Color_Pink">Pink</system:String>
+    <system:String x:Key="Color_Cyan">Cyan</system:String>
+    <system:String x:Key="Color_Red">Red</system:String>
+    <system:String x:Key="Color_Slate">Slate</system:String>
+
+    <!--  Activity log messages  -->
+    <system:String x:Key="Log_DnsSet">DNS set to {0}</system:String>
+    <system:String x:Key="Log_DnsReset">DNS reset to automatic (DHCP)</system:String>
+    <system:String x:Key="Log_DnsAdded">DNS "{0}" added</system:String>
+    <system:String x:Key="Log_DnsDeleted">DNS "{0}" deleted</system:String>
+    <system:String x:Key="Log_SpeedTestRun">Speed test run</system:String>
+    <system:String x:Key="Log_SpeedTestDetails">Download: {0} Mbps, Upload: {1} Mbps, Ping: {2}ms, Jitter: {3}ms</system:String>
+    <system:String x:Key="Log_WifiConnected">Connected to Wi-Fi "{0}"</system:String>
+    <system:String x:Key="Log_DnsResetFromTray">DNS reset to automatic (DHCP) — from tray</system:String>
+    <system:String x:Key="Log_DiagnosticsFromTray">Diagnose &amp; auto-fix run from tray</system:String>
+
+</ResourceDictionary>

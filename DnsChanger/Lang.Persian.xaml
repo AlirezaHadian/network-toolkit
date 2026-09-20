@@ -1,0 +1,171 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--  سایدبار  -->
+    <system:String x:Key="Nav_Dns">سرورهای DNS</system:String>
+    <system:String x:Key="Nav_SpeedTest">تست سرعت</system:String>
+    <system:String x:Key="Nav_Troubleshoot">رفع مشکل اتصال</system:String>
+    <system:String x:Key="Nav_Wifi">شبکه‌های Wi-Fi</system:String>
+    <system:String x:Key="Nav_IpInfo">اطلاعات IP</system:String>
+    <system:String x:Key="Nav_History">تاریخچه‌ی تغییرات</system:String>
+    <system:String x:Key="Nav_Settings">تنظیمات</system:String>
+
+    <!--  صفحه‌ی تنظیمات  -->
+    <system:String x:Key="Settings_Title">تنظیمات</system:String>
+    <system:String x:Key="Settings_Subtitle">ظاهر و زبان برنامه رو مطابق سلیقه‌ات تنظیم کن</system:String>
+    <system:String x:Key="Settings_DisplayMode">حالت نمایش</system:String>
+    <system:String x:Key="Settings_DarkMode">🌙  تیره</system:String>
+    <system:String x:Key="Settings_LightMode">☀️  روشن</system:String>
+    <system:String x:Key="Settings_ThemeColor">رنگ تم</system:String>
+    <system:String x:Key="Settings_Language">زبان برنامه</system:String>
+    <system:String x:Key="Settings_LanguageNote">با تغییر زبان، جهت کل برنامه هم بین راست‌به‌چپ و چپ‌به‌راست عوض میشه.</system:String>
+
+    <!--  صفحه‌ی اطلاعات IP  -->
+    <system:String x:Key="IpInfo_Title">اطلاعات IP</system:String>
+    <system:String x:Key="IpInfo_Subtitle">موقعیت و اطلاعات IP خودت یا هر IP دلخواه</system:String>
+    <system:String x:Key="IpInfo_Refresh">بروزرسانی</system:String>
+    <system:String x:Key="IpInfo_MyIp">IP من</system:String>
+    <system:String x:Key="IpInfo_CountryCity">کشور</system:String>
+    <system:String x:Key="IpInfo_Isp">ISP</system:String>
+    <system:String x:Key="IpInfo_Timezone">منطقه‌ی زمانی</system:String>
+    <system:String x:Key="IpInfo_CheckCustom">بررسی یک IP دلخواه</system:String>
+    <system:String x:Key="IpInfo_CheckButton">بررسی</system:String>
+    <system:String x:Key="IpInfo_Placeholder">مثلاً 8.8.8.8</system:String>
+    <system:String x:Key="IpInfo_InvalidIp">لطفاً یک IP معتبر وارد کن.</system:String>
+    <system:String x:Key="IpInfo_LookupFailed">دریافت اطلاعات این IP ناموفق بود.</system:String>
+
+    <!--  صفحه‌ی DNS  -->
+    <system:String x:Key="Dns_Title">سرورهای DNS</system:String>
+    <system:String x:Key="Dns_Subtitle">تغییر سریع DNS با یک کلیک</system:String>
+    <system:String x:Key="Dns_ResetButton">بازنشانی DNS</system:String>
+    <system:String x:Key="Dns_CheckPingButton">بررسی پینگ همه</system:String>
+    <system:String x:Key="Dns_ActiveAdapter">آداپتور فعال</system:String>
+    <system:String x:Key="Dns_CurrentDns">DNS فعلی</system:String>
+    <system:String x:Key="Dns_PublicIp">IP عمومی</system:String>
+    <system:String x:Key="Dns_Connected">متصل</system:String>
+    <system:String x:Key="Dns_Disconnected">قطع</system:String>
+    <system:String x:Key="Dns_AutoDhcp">خودکار (DHCP)</system:String>
+    <system:String x:Key="Dns_AddTitle">افزودن DNS</system:String>
+    <system:String x:Key="Dns_NamePlaceholder">نام (مثلا Gaming DNS)</system:String>
+    <system:String x:Key="Dns_AddButton">افزودن</system:String>
+    <system:String x:Key="Dns_ApplyButton">اعمال</system:String>
+    <system:String x:Key="Dns_InvalidNameOrIp">لطفاً یک نام و یک IP معتبر برای Primary DNS وارد کن.</system:String>
+    <system:String x:Key="Dns_InvalidSecondaryIp">Secondary DNS معتبر نیست.</system:String>
+    <system:String x:Key="Dns_SetMessage">DNS تنظیم شد</system:String>
+    <system:String x:Key="Dns_ResetMessage">DNS بازنشانی شد</system:String>
+    <system:String x:Key="Dns_Fetching">در حال گرفتن...</system:String>
+    <system:String x:Key="Dns_Unknown">نامشخص</system:String>
+
+    <!--  صفحه‌ی رفع مشکل اتصال  -->
+    <system:String x:Key="Troubleshoot_Title">رفع مشکل اتصال</system:String>
+    <system:String x:Key="Troubleshoot_Subtitle">ابزارهای سریع برای رفع مشکلات رایج اتصال به اینترنت</system:String>
+    <system:String x:Key="Troubleshoot_ResetTitle">بازنشانی DNS</system:String>
+    <system:String x:Key="Troubleshoot_ResetDesc">بازگشت به DNS خودکار (DHCP)</system:String>
+    <system:String x:Key="Troubleshoot_ResetButton">بازنشانی</system:String>
+    <system:String x:Key="Troubleshoot_FlushTitle">پاک‌سازی DNS Cache</system:String>
+    <system:String x:Key="Troubleshoot_FlushDesc">اجرای معادل ipconfig /flushdns</system:String>
+    <system:String x:Key="Troubleshoot_FlushButton">پاک‌سازی</system:String>
+    <system:String x:Key="Troubleshoot_RestartTitle">ری‌استارت آداپتور شبکه</system:String>
+    <system:String x:Key="Troubleshoot_RestartDesc">غیرفعال و فعال‌سازی مجدد کارت شبکه</system:String>
+    <system:String x:Key="Troubleshoot_RestartButton">ری‌استارت</system:String>
+    <system:String x:Key="Troubleshoot_DiagnoseTitle">تشخیص و رفع خودکار</system:String>
+    <system:String x:Key="Troubleshoot_DiagnoseDesc">بررسی آداپتور، DNS و اتصال اینترنت با ابزار خودمان</system:String>
+    <system:String x:Key="Troubleshoot_DiagnoseButton">شروع بررسی</system:String>
+    <system:String x:Key="Troubleshoot_ResultsHeader">نتیجه‌ی بررسی</system:String>
+    <system:String x:Key="Troubleshoot_Checking">در حال بررسی...</system:String>
+    <system:String x:Key="Troubleshoot_FlushSuccess">DNS Cache پاک شد!</system:String>
+    <system:String x:Key="Troubleshoot_RestartSuccess">آداپتور ری‌استارت شد!</system:String>
+    <system:String x:Key="Log_FlushDns">DNS Cache پاک‌سازی شد</system:String>
+    <system:String x:Key="Log_RestartAdapter">آداپتور شبکه ری‌استارت شد</system:String>
+
+    <!--  صفحه‌ی Wi-Fi  -->
+    <system:String x:Key="Wifi_Title">شبکه‌های Wi-Fi در دسترس</system:String>
+    <system:String x:Key="Wifi_Subtitle">اتصال سریع بدون رفتن به تنظیمات ویندوز</system:String>
+    <system:String x:Key="Wifi_Loading">در حال جست‌وجوی شبکه‌ها...</system:String>
+    <system:String x:Key="Wifi_ConnectButton">اتصال</system:String>
+    <system:String x:Key="Wifi_Connecting">در حال اتصال...</system:String>
+    <system:String x:Key="Wifi_Secured">امن (رمزگذاری شده)</system:String>
+    <system:String x:Key="Wifi_Open">باز (بدون رمزگذاری)</system:String>
+    <system:String x:Key="Wifi_ConnectSuccess">به «{0}» متصل شدی.</system:String>
+    <system:String x:Key="Wifi_ConnectFailed">اتصال به «{0}» ناموفق بود — رمز رو چک کن.</system:String>
+    <system:String x:Key="Wifi_PasswordTitle">اتصال به «{0}»</system:String>
+    <system:String x:Key="Wifi_PasswordPrompt">رمز عبور شبکه رو وارد کن:</system:String>
+    <system:String x:Key="Dialog_CancelButton">انصراف</system:String>
+    <system:String x:Key="Dialog_ConfirmTitle">تایید</system:String>
+    <system:String x:Key="Dialog_YesButton">بله</system:String>
+    <system:String x:Key="Dialog_NoButton">خیر</system:String>
+    <system:String x:Key="Dialog_OkButton">باشه</system:String>
+    <system:String x:Key="Dialog_ErrorTitle">خطا</system:String>
+    <system:String x:Key="Dialog_WarningTitle">هشدار</system:String>
+    <system:String x:Key="Dialog_InfoTitle">توجه</system:String>
+
+    <!--  صفحه‌ی تست سرعت  -->
+    <system:String x:Key="SpeedTest_Title">تست سرعت</system:String>
+    <system:String x:Key="SpeedTest_Subtitle">تست دانلود، آپلود، پینگ و دیتاسنتر</system:String>
+    <system:String x:Key="SpeedTest_Ready">آماده</system:String>
+    <system:String x:Key="SpeedTest_StartButton">شروع تست سرعت</system:String>
+    <system:String x:Key="SpeedTest_DownloadLabel">Mbps دانلود</system:String>
+    <system:String x:Key="SpeedTest_UploadLabel">Mbps آپلود</system:String>
+    <system:String x:Key="SpeedTest_PingLabel">ms پینگ</system:String>
+    <system:String x:Key="SpeedTest_JitterLabel">ms جیتر</system:String>
+    <system:String x:Key="SpeedTest_DataCenterLabel">دیتاسنتر</system:String>
+    <system:String x:Key="SpeedTest_ChartHeader">نوسانات زنده‌ی سرعت</system:String>
+    <system:String x:Key="SpeedTest_PhaseDataCenter">در حال شناسایی دیتاسنتر...</system:String>
+    <system:String x:Key="SpeedTest_PhaseDownload">در حال تست دانلود...</system:String>
+    <system:String x:Key="SpeedTest_PhaseUpload">در حال تست آپلود...</system:String>
+    <system:String x:Key="SpeedTest_PhasePing">در حال تست پینگ...</system:String>
+    <system:String x:Key="SpeedTest_PhaseDone">تمام شد</system:String>
+
+    <!--  صفحه‌ی تاریخچه  -->
+    <system:String x:Key="History_Title">تاریخچه‌ی تغییرات</system:String>
+    <system:String x:Key="History_Subtitle">فهرست کامل تغییرات DNS که تا الان اعمال شده</system:String>
+    <system:String x:Key="History_ClearButton">پاک کردن همه</system:String>
+    <system:String x:Key="History_ClearConfirm">کل تاریخچه پاک بشه؟</system:String>
+
+    <!--  منوی Tray  -->
+    <system:String x:Key="Tray_Open">باز کردن برنامه</system:String>
+    <system:String x:Key="Tray_ApplyDns">اعمال DNS   ◂</system:String>
+    <system:String x:Key="Tray_Exit">خروج</system:String>
+
+    <!--  تشخیص و رفع خودکار  -->
+    <system:String x:Key="Diag_AdapterTitle">آداپتور شبکه</system:String>
+    <system:String x:Key="Diag_AdapterOk">آداپتور فعال پیدا شد.</system:String>
+    <system:String x:Key="Diag_AdapterFail">هیچ آداپتور فعالی پیدا نشد.</system:String>
+    <system:String x:Key="Diag_GatewayTitle">اتصال به روتر (Gateway)</system:String>
+    <system:String x:Key="Diag_GatewayOk">روتر در دسترسه.</system:String>
+    <system:String x:Key="Diag_GatewayFail">روتر جواب نداد.</system:String>
+    <system:String x:Key="Diag_RestartTitle">نتیجه‌ی ری‌استارت آداپتور</system:String>
+    <system:String x:Key="Diag_RestartOk">آداپتور ری‌استارت شد و روتر الان در دسترسه.</system:String>
+    <system:String x:Key="Diag_RestartFail">حتی بعد از ری‌استارت آداپتور هم روتر جواب نداد.</system:String>
+    <system:String x:Key="Diag_InternetTitle">اتصال به اینترنت</system:String>
+    <system:String x:Key="Diag_InternetOk">اینترنت وصله.</system:String>
+    <system:String x:Key="Diag_InternetFail">اینترنت قطعه (حتی با IP مستقیم هم جواب نداد).</system:String>
+    <system:String x:Key="Diag_DnsTitle">سرور DNS</system:String>
+    <system:String x:Key="Diag_DnsOk">DNS درست کار می‌کنه.</system:String>
+    <system:String x:Key="Diag_DnsFail">اینترنت وصله ولی DNS جواب نمی‌ده. در حال تغییر DNS به یه سرور جایگزین...</system:String>
+    <system:String x:Key="Diag_FallbackTitle">رفع خودکار</system:String>
+    <system:String x:Key="Diag_FallbackOk">مشکل حل شد! DNS به {0} تغییر کرد.</system:String>
+    <system:String x:Key="Diag_FallbackFail">هیچ‌کدوم از DNS های جایگزین هم جواب ندادن — احتمالاً مشکل از فیلترینگ عمیق‌تر یا خودِ ISP ـه.</system:String>
+
+    <!--  اسم رنگ‌های تم  -->
+    <system:String x:Key="Color_BluePurple">آبی‌بنفش</system:String>
+    <system:String x:Key="Color_Green">سبز</system:String>
+    <system:String x:Key="Color_Orange">نارنجی</system:String>
+    <system:String x:Key="Color_Pink">صورتی</system:String>
+    <system:String x:Key="Color_Cyan">فیروزه‌ای</system:String>
+    <system:String x:Key="Color_Red">قرمز</system:String>
+    <system:String x:Key="Color_Slate">خاکستری</system:String>
+
+    <!--  پیام‌های تاریخچه  -->
+    <system:String x:Key="Log_DnsSet">DNS {0} ست شد</system:String>
+    <system:String x:Key="Log_DnsReset">DNS به حالت خودکار (DHCP) بازنشانی شد</system:String>
+    <system:String x:Key="Log_DnsAdded">DNS «{0}» اضافه شد</system:String>
+    <system:String x:Key="Log_DnsDeleted">DNS «{0}» حذف شد</system:String>
+    <system:String x:Key="Log_SpeedTestRun">تست سرعت اجرا شد</system:String>
+    <system:String x:Key="Log_SpeedTestDetails">دانلود: {0} Mbps, آپلود: {1} Mbps, پینگ: {2}ms, جیتر: {3}ms</system:String>
+    <system:String x:Key="Log_WifiConnected">به Wi-Fi «{0}» متصل شد</system:String>
+    <system:String x:Key="Log_DnsResetFromTray">DNS به حالت خودکار (DHCP) بازنشانی شد — از Tray</system:String>
+    <system:String x:Key="Log_DiagnosticsFromTray">تشخیص و رفع خودکار از Tray اجرا شد</system:String>
+
+</ResourceDictionary>
