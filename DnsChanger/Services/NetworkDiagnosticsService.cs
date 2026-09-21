@@ -1,8 +1,5 @@
 using DnsChanger.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace DnsChanger.Services
@@ -10,6 +7,7 @@ namespace DnsChanger.Services
     public class NetworkDiagnosticsService : INetworkDiagnosticsService
     {
         private readonly IDnsService _dnsService;
+        private readonly INetworkProbe _probe;
 
         private static readonly string[] TestHosts = { "www.google.com", "www.cloudflare.com", "www.microsoft.com" };
 
@@ -20,53 +18,36 @@ namespace DnsChanger.Services
             new DnsProvider { Name = "Google", Primary = "8.8.8.8", Secondary = "8.8.4.4" },
         };
 
-        public NetworkDiagnosticsService(IDnsService dnsService)
+        public NetworkDiagnosticsService(IDnsService dnsService, INetworkProbe probe)
         {
             _dnsService = dnsService;
+            _probe = probe;
         }
 
         public async Task<List<DiagnosticStepResult>> RunDiagnosticsAsync()
         {
             var results = new List<DiagnosticStepResult>();
 
-            // Step 1: Check if there is an active network adapter
+            // Step 1: Active adapter
             var adapter = _dnsService.GetActiveAdapter();
             if (adapter == null)
             {
-                results.Add(new DiagnosticStepResult
-                {
-                    StepType = DiagnosticStepType.AdapterCheck,
-                    Status = DiagnosticStatus.Failure,
-                    IsSuccess = false
-                });
+                results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.AdapterCheck, Status = DiagnosticStatus.Failure, IsSuccess = false });
                 return results;
             }
-            results.Add(new DiagnosticStepResult
-            {
-                StepType = DiagnosticStepType.AdapterCheck,
-                Status = DiagnosticStatus.Success,
-                IsSuccess = true
-            });
+            results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.AdapterCheck, Status = DiagnosticStatus.Success, IsSuccess = true });
 
-            // Step 2: Gateway (Router) ping
-            var gateway = adapter.GetIPProperties().GatewayAddresses.FirstOrDefault();
-            bool gatewayOk = gateway != null && await PingHostAsync(gateway.Address.ToString());
-
+            // Step 2: Gateway (router)
+            bool gatewayOk = await _probe.CanReachGatewayAsync(adapter);
             if (!gatewayOk)
             {
-                results.Add(new DiagnosticStepResult
-                {
-                    StepType = DiagnosticStepType.GatewayCheck,
-                    Status = DiagnosticStatus.Failure,
-                    IsSuccess = false
-                });
+                results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.GatewayCheck, Status = DiagnosticStatus.Failure, IsSuccess = false });
 
                 _dnsService.RestartActiveAdapter();
                 await Task.Delay(3000);
 
                 adapter = _dnsService.GetActiveAdapter();
-                gateway = adapter?.GetIPProperties().GatewayAddresses.FirstOrDefault();
-                gatewayOk = gateway != null && await PingHostAsync(gateway.Address.ToString());
+                gatewayOk = adapter != null && await _probe.CanReachGatewayAsync(adapter);
 
                 results.Add(new DiagnosticStepResult
                 {
@@ -79,16 +60,11 @@ namespace DnsChanger.Services
             }
             else
             {
-                results.Add(new DiagnosticStepResult
-                {
-                    StepType = DiagnosticStepType.GatewayCheck,
-                    Status = DiagnosticStatus.Success,
-                    IsSuccess = true
-                });
+                results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.GatewayCheck, Status = DiagnosticStatus.Success, IsSuccess = true });
             }
 
-            // Step 3: Ping a well-known public IP (no DNS needed)
-            bool internetOk = await PingHostAsync("8.8.8.8");
+            // Step 3: Internet (by IP, no DNS needed)
+            bool internetOk = await _probe.PingAsync("8.8.8.8");
             results.Add(new DiagnosticStepResult
             {
                 StepType = DiagnosticStepType.InternetCheck,
@@ -97,91 +73,37 @@ namespace DnsChanger.Services
             });
             if (!internetOk) return results;
 
-            // Step 4: Check if DNS is working (resolve a domain)
-            bool dnsOk = await CanResolveAnyAsync(TestHosts);
+            // Step 4: DNS resolution
+            bool dnsOk = await _probe.CanResolveAnyAsync(TestHosts);
             if (dnsOk)
             {
-                results.Add(new DiagnosticStepResult
-                {
-                    StepType = DiagnosticStepType.DnsCheck,
-                    Status = DiagnosticStatus.Success,
-                    IsSuccess = true
-                });
+                results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.DnsCheck, Status = DiagnosticStatus.Success, IsSuccess = true });
+                return results;
             }
-            else
+
+            results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.DnsCheck, Status = DiagnosticStatus.Failure, IsSuccess = false });
+
+            // Auto-fix: try known DNS providers one by one
+            foreach (var candidate in FixCandidates)
             {
-                results.Add(new DiagnosticStepResult
-                {
-                    StepType = DiagnosticStepType.DnsCheck,
-                    Status = DiagnosticStatus.Failure,
-                    IsSuccess = false
-                });
+                _dnsService.SetDns(candidate);
+                await Task.Delay(1500);
 
-                // رفع خودکار: چندتا DNS شناخته‌شده رو یکی‌یکی امتحان می‌کنیم تا یکی جواب بده
-                foreach (var candidate in FixCandidates)
+                if (await _probe.CanResolveAnyAsync(TestHosts))
                 {
-                    _dnsService.SetDns(candidate);
-                    await Task.Delay(1500);
-
-                    bool fixedNow = await CanResolveAnyAsync(TestHosts);
-                    if (fixedNow)
+                    results.Add(new DiagnosticStepResult
                     {
-                        results.Add(new DiagnosticStepResult
-                        {
-                            StepType = DiagnosticStepType.DnsFallbackSuccess,
-                            Status = DiagnosticStatus.Success,
-                            IsSuccess = true,
-                            ExtraData = candidate.Name
-                        });
-                        return results;
-                    }
+                        StepType = DiagnosticStepType.DnsFallbackSuccess,
+                        Status = DiagnosticStatus.Success,
+                        IsSuccess = true,
+                        ExtraData = candidate.Name
+                    });
+                    return results;
                 }
-
-                results.Add(new DiagnosticStepResult
-                {
-                    StepType = DiagnosticStepType.DnsFallbackFailure,
-                    Status = DiagnosticStatus.Failure,
-                    IsSuccess = false
-                });
             }
+
+            results.Add(new DiagnosticStepResult { StepType = DiagnosticStepType.DnsFallbackFailure, Status = DiagnosticStatus.Failure, IsSuccess = false });
             return results;
-        }
-
-        private async Task<bool> PingHostAsync(string host)
-        {
-            try
-            {
-                using var ping = new Ping();
-                var reply = await ping.SendPingAsync(host, 1500);
-                return reply.Status == IPStatus.Success;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private async Task<bool> CanResolveDnsAsync(string hostName)
-        {
-            try
-            {
-                await System.Net.Dns.GetHostEntryAsync(hostName);
-                return true;
-            }
-            catch (SocketException)
-            {
-                return false;
-            }
-        }
-
-        private async Task<bool> CanResolveAnyAsync(IEnumerable<string> hosts)
-        {
-            foreach (var host in hosts)
-            {
-                if (await CanResolveDnsAsync(host))
-                    return true;
-            }
-            return false;
         }
     }
 }

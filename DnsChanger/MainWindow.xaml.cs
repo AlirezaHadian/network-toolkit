@@ -747,7 +747,7 @@ namespace DnsChanger
                 Icon = System.Drawing.Icon.ExtractAssociatedIcon(
                     System.Reflection.Assembly.GetExecutingAssembly().Location),
                 Visible = true,
-                Text = "DNS Changer"
+                Text = "Network Toolkit"
             };
 
             _trayIcon.MouseUp += TrayIcon_MouseUp;

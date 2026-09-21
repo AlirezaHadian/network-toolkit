@@ -1,6 +1,7 @@
 <div align="center">
 
-<img src="Images/appicon-preview.png" width="96" alt="App icon"/>
+<!-- <img src="Images/appicon-preview.png" width="96" alt="App icon"/> -->
+<img src="DnsChanger/Images/appicon-preview.png" width="96" alt="App icon"/>
 
 # DNS Changer
 
@@ -24,6 +25,35 @@ Built with WPF, .NET 8, SQLite, and a clean layered architecture.
 DNS Changer is a desktop tool that goes beyond switching DNS servers: it diagnoses and automatically repairs common connectivity problems, tests real network speed, scans and connects to nearby Wi-Fi networks, looks up IP geolocation, and keeps a full activity log — all from a single themeable, bilingual, multi-page interface that runs quietly from the system tray when not in use.
 
 Rather than being a quick single-file script, the project is deliberately structured the way a production application would be: UI and business logic are separated, dependencies are injected, data is persisted in SQLite, services are free of UI and language concerns, and the codebase is built to be testable and extendable.
+
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/dns.png" alt="DNS servers"/></td>
+    <td><img src="docs/screenshots/speedtest.png" alt="Live speed test"/></td>
+  </tr>
+  <tr>
+    <td align="center">DNS servers</td>
+    <td align="center">Live speed test</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/diagnostics.png" alt="Diagnose and auto-fix"/></td>
+    <td><img src="docs/screenshots/wifi.png" alt="Wi-Fi networks"/></td>
+  </tr>
+  <tr>
+    <td align="center">Diagnose &amp; auto-fix</td>
+    <td align="center">Wi-Fi networks</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/light-theme.png" alt="Light theme"/></td>
+    <td><img src="docs/screenshots/persian-rtl.png" alt="Persian right-to-left interface"/></td>
+  </tr>
+  <tr>
+    <td align="center">Light theme with custom accent</td>
+    <td align="center">Persian (right-to-left)</td>
+  </tr>
+</table>
 
 ## ✨ Features
 
@@ -78,6 +108,8 @@ DnsChanger/
 ├── App.xaml(.cs)      # Composition root: DI, app-wide theme resources, startup
 ├── CustomDialog.xaml  # Themed replacement for MessageBox (info/error/warning/confirm/password)
 └── MainWindow.xaml    # UI only — delegates all logic to injected services
+
+DnsChanger.Tests/      # xUnit + Moq tests for the diagnostics engine and Wi-Fi model
 ```
 
 **Key design decisions:**
@@ -90,6 +122,7 @@ DnsChanger/
 | **Services return enums, not display strings** | `SpeedTestService` and `NetworkDiagnosticsService` report *what happened* (`SpeedTestPhase.DownloadTest`, `DiagnosticStepType.GatewayCheck`); only the view maps those to localized text — so business logic stays language-agnostic |
 | Language as merged `ResourceDictionary` | Swapping one dictionary retranslates the entire UI live, the same mechanism used for theming |
 | Streamed speed test (chunked download/upload) | Reports real-time throughput and surfaces each metric as soon as it's ready |
+| Real network I/O behind `INetworkProbe` | Lets the entire auto-repair decision tree (router down → restart adapter, DNS down → fallback chain) be unit-tested with mocks, without sending a single packet |
 | Theme resources at `Application` scope | Lets every window — including dialogs — share and live-update the same theme |
 
 ## 🛠 Tech Stack
@@ -104,7 +137,14 @@ DnsChanger/
 | Dependency Injection | `Microsoft.Extensions.DependencyInjection` |
 | Settings persistence | JSON (`System.Text.Json`) |
 | System tray | `System.Windows.Forms.NotifyIcon` |
+| Testing | xUnit, Moq |
 | Icons | [Unicons](https://github.com/Iconscout/unicons) by IconScout (Apache 2.0) |
+
+## 🧪 Running Tests
+
+```bash
+dotnet test
+```
 
 ## 🚀 Getting Started
 
@@ -133,7 +173,7 @@ dotnet build
 - [x] IP geolocation lookup
 - [x] Custom title bar and system tray integration
 - [x] Full Persian/English localization with RTL/LTR switching
-- [ ] Unit test coverage for the service layer
+- [x] Unit tests for core decision logic (xUnit + Moq)
 - [ ] Installer package
 - [ ] Android companion app (.NET MAUI)
 

@@ -9,6 +9,8 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationIcon>Images\appicon.ico</ApplicationIcon>
+		<AssemblyName>NetworkToolkit</AssemblyName>
+		<Product>Network Toolkit</Product>
 	</PropertyGroup>
 	<ItemGroup>
 		<Using Remove="System.Windows.Forms" />

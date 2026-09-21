@@ -42,6 +42,7 @@ namespace DnsChanger
             services.AddSingleton<ISpeedTestService, SpeedTestService>();
             services.AddSingleton<IWifiService, WifiService>();
             services.AddSingleton<IIpInfoService, IpInfoService>();
+            services.AddSingleton<INetworkProbe, NetworkProbe>();
             services.AddTransient<MainWindow>();
         }
 
