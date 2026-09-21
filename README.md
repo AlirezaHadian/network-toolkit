@@ -1,11 +1,10 @@
 <div align="center">
 
-<!-- <img src="Images/appicon-preview.png" width="96" alt="App icon"/> -->
-<img src="DnsChanger/Images/appicon-preview.png" width="96" alt="App icon"/>
+<img src="Images/appicon-preview.png" width="96" alt="App icon"/>
 
-# DNS Changer
+# Network Toolkit
 
-**A modern Windows desktop utility for switching DNS servers instantly — with automatic connection diagnostics, live speed testing, Wi-Fi management, and full Persian/English localization.**
+**A modern Windows network toolkit: one-click DNS switching, automatic connection diagnostics and repair, live speed testing, Wi-Fi management, and IP lookup — fully localized in Persian and English.**
 
 Built with WPF, .NET 8, SQLite, and a clean layered architecture.
 
@@ -22,7 +21,7 @@ Built with WPF, .NET 8, SQLite, and a clean layered architecture.
 
 ## 📖 Overview
 
-DNS Changer is a desktop tool that goes beyond switching DNS servers: it diagnoses and automatically repairs common connectivity problems, tests real network speed, scans and connects to nearby Wi-Fi networks, looks up IP geolocation, and keeps a full activity log — all from a single themeable, bilingual, multi-page interface that runs quietly from the system tray when not in use.
+Network Toolkit started as a simple DNS changer and grew into a full desktop network utility: it diagnoses and automatically repairs common connectivity problems, tests real network speed, scans and connects to nearby Wi-Fi networks, looks up IP geolocation, and keeps a full activity log — all from a single themeable, bilingual, multi-page interface that runs quietly from the system tray when not in use.
 
 Rather than being a quick single-file script, the project is deliberately structured the way a production application would be: UI and business logic are separated, dependencies are injected, data is persisted in SQLite, services are free of UI and language concerns, and the codebase is built to be testable and extendable.
 
@@ -155,8 +154,8 @@ dotnet test
 
 ### Build & Run
 ```bash
-git clone https://github.com/AlirezaHadian/DnsChanger.git
-cd DnsChanger
+git clone https://github.com/AlirezaHadian/network-toolkit.git
+cd network-toolkit
 dotnet build
 ```
 
