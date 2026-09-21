@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Images/appicon-preview.png" width="96" alt="App icon"/>
+<img src="DnsChanger/Images/appicon-preview.png" width="96" alt="App icon"/>
 
 # Network Toolkit
 
@@ -29,24 +29,24 @@ Rather than being a quick single-file script, the project is deliberately struct
 
 <table>
   <tr>
-    <td><img src="docs/screenshots/dns.png" alt="DNS servers"/></td>
-    <td><img src="docs/screenshots/speedtest.png" alt="Live speed test"/></td>
+    <td><img src="docs/screenshots/dns.PNG" alt="DNS servers"/></td>
+    <td><img src="docs/screenshots/speedtest.PNG" alt="Live speed test"/></td>
   </tr>
   <tr>
     <td align="center">DNS servers</td>
     <td align="center">Live speed test</td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/diagnostics.png" alt="Diagnose and auto-fix"/></td>
-    <td><img src="docs/screenshots/wifi.png" alt="Wi-Fi networks"/></td>
+    <td><img src="docs/screenshots/diagnostics.PNG" alt="Diagnose and auto-fix"/></td>
+    <td><img src="docs/screenshots/wifi.PNG" alt="Wi-Fi networks"/></td>
   </tr>
   <tr>
     <td align="center">Diagnose &amp; auto-fix</td>
     <td align="center">Wi-Fi networks</td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/light-theme.png" alt="Light theme"/></td>
-    <td><img src="docs/screenshots/persian-rtl.png" alt="Persian right-to-left interface"/></td>
+    <td><img src="docs/screenshots/light-theme.PNG" alt="Light theme"/></td>
+    <td><img src="docs/screenshots/persian-rtl.PNG" alt="Persian right-to-left interface"/></td>
   </tr>
   <tr>
     <td align="center">Light theme with custom accent</td>
