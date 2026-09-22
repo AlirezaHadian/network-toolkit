@@ -599,6 +599,16 @@ namespace DnsChanger
             if (sender is not Button clickedButton) return;
             string targetPage = clickedButton.Tag?.ToString();
 
+            Style defaultStyle = (Style)FindResource("SidebarButtonStyle");
+            NavDnsButton.Style = defaultStyle;
+            NavHistoryButton.Style = defaultStyle;
+            NavSpeedTestButton.Style = defaultStyle;
+            NavTroubleshootButton.Style = defaultStyle;
+            NavWifiButton.Style = defaultStyle;
+            NavIpInfoButton.Style = defaultStyle;
+            NavSettingsButton.Style = defaultStyle;
+            clickedButton.Style = (Style)FindResource("SidebarButtonActiveStyle");
+
             DnsPagePanel.Visibility = Visibility.Collapsed;
             HistoryPagePanel.Visibility = Visibility.Collapsed;
             SpeedTestPagePanel.Visibility = Visibility.Collapsed;
@@ -627,19 +637,6 @@ namespace DnsChanger
                     break;
                 case "Settings": SettingsPagePanel.Visibility = Visibility.Visible; break;
             }
-
-            // برگردوندن استایل عادی به همه‌ی دکمه‌های Sidebar
-            Style defaultStyle = (Style)FindResource("SidebarButtonStyle");
-            NavDnsButton.Style = defaultStyle;
-            NavHistoryButton.Style = defaultStyle;
-            NavSpeedTestButton.Style = defaultStyle;
-            NavTroubleshootButton.Style = defaultStyle;
-            NavWifiButton.Style = defaultStyle;
-            NavSettingsButton.Style = defaultStyle;
-            NavIpInfoButton.Style = defaultStyle;
-
-            // دادن استایل فعال به دکمه‌ای که کلیک شده
-            clickedButton.Style = (Style)FindResource("SidebarButtonActiveStyle");
         }
         private void DarkModeButton_Click(object sender, RoutedEventArgs e)
         {
